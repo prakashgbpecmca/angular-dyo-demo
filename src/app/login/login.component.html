@@ -1,0 +1,27 @@
+
+
+
+<section>
+  <div class="col-sm-4 col-sm-offset-4" id="loginForm">
+
+      <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+        <div class="form-group">
+          <img [src]="logo" [alt]="logo" class="img-responsive">
+        </div>
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input type="username" [(ngModel)]='user.UserName' formControlName="username" class="form-control" autofocus>
+          <span class="text-danger" *ngIf="loginForm.get('username').invalid">Username is required.</span>
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" formControlName="password" [(ngModel)]='user.Password' class="form-control" autofocus>
+          <span class="text-danger" *ngIf="loginForm.get('password').invalid">Password is required.</span>
+        </div>
+      <div>
+              <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Submit</button> &nbsp;&nbsp;
+              <button type="reset" class="btn btn-danger">Clear</button>
+      </div>
+      </form>
+</div>
+</section>

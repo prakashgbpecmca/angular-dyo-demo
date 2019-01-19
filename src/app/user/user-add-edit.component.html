@@ -1,0 +1,618 @@
+<form novalidate #userFrom="ngForm" (ngSubmit)="saveUser(userFrom)">
+  <div class="modal-header">
+    <button type="button" class="close" (click)="activeModal.dismiss()">
+      <i
+        class="fa fa-times-circle-o"
+        aria-hidden="true"
+        style="font-size:30px;"
+      ></i>
+    </button>
+    <h4 class="modal-title underline">UserDetail</h4>
+  </div>
+  <div class="modal-body"></div>
+  <div class="card card-default">
+    <div class="card-heading">BasicDetail</div>
+    <div class="card-body">
+      <div class="col-sm-6">
+        <div class="form-group"  [ngClass]="{
+          'has-error':
+            countryVar.invalid && (countryVar.touched || submitted)
+        }">
+          <label class="control-label" for="country"
+            >Country<span class="redColor">*</span></label
+          >
+          <div id="Xe">
+
+            <select id="country"
+            name="country"
+              class="form-control"
+              #countryVar = "ngModel"
+              (change)="SetCountryPhoneCodeIssue(userDetail.Address.Country)" appSelectValidator
+              [(ngModel)]="userDetail.Address.Country">
+              <option ngValue="null" selected disabled>Select Country</option>
+              <option *ngFor="let country of countries" [ngValue]="country">
+                {{ country.Name }}
+              </option>
+            </select>
+            <pre>{{userDetail.Address.Country.Code}}</pre>
+            <pre>{{countryVar.errors |json}}</pre>
+            <span class="help-block has-error"
+              *ngIf="countryVar.invalid &&(countryVar.touched || submitted)">
+              Country is required
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div
+          class="form-group"
+          [ngClass]="{
+            'has-error':
+              firstNameVar.invalid && (firstNameVar.touched|| submitted)
+          }"
+        >
+          <div>
+            <label class="control-label" for="contact"
+              >Contact <span class="redColor">*</span></label
+            >
+          </div>
+          <div>
+            <input
+              type="text"
+              id="contact"
+              name="contact"
+              #firstNameVar="ngModel"
+              [(ngModel)]="userDetail.ContactFirstName"
+              class="form-control fontsize12"
+              placeholder="ContactPlaceholder"
+              required
+            />
+          </div>
+          <div class="clearfix"></div>
+          <span
+            class="help-block"
+            *ngIf="firstNameVar.invalid && (firstNameVar.touched|| submitted)"
+          >
+            ContactValidationError
+          </span>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-sm-6">
+        <div
+          class="form-group"
+          [ngClass]="{
+            'has-error':
+              nickNameVar.invalid && (nickNameVar.touched || submitted)
+          }"
+        >
+          <div>
+            <label class="control-label" for="nickName"
+              >Short_Name <span class="redColor">*</span></label
+            >
+          </div>
+          <div>
+            <input
+              type="text"
+              id="nickName"
+              name="nickName"
+              [(ngModel)]="userDetail.ShortName"
+              #nickNameVar="ngModel"
+              placeholder="Short_Name Required"
+              class="form-control fontsize12"
+              required
+            />
+          </div>
+          <div class="clearfix"></div>
+          <span
+            class="help-block has-error"
+            ng-show="nickNameVar.invalid &&
+                                          (nickNameVar.touched || submitted)"
+          >
+            Shor name required.
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div
+          class="form-group"
+          [ngClass]="{ 'has-error':( emailVar.invalid || emailExist) && (emailVar.touched || submitted) }"  >
+          <div>
+            <label class="control-label" for="email">Email<span class="redColor">*</span></label>
+          </div>
+          <div class="col-sm-11 paddingboth">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              [(ngModel)]="userDetail.Email"
+              #emailVar="ngModel"
+              (blur)="emailValidation(userDetail.Email)"
+              class="form-control fontsize12"
+              placeholder="EmailPlaceholder"
+              required
+              email />
+          </div>
+          <pre>{{userDetail.Email}}</pre>
+          <div class="clearfix"></div>
+          <span
+            class="help-block has-error"
+            *ngIf ="emailVar.errors?.required && (emailVar.touched || submitted)">
+            EmailValidationError
+          </span>
+          <span
+            class="help-block has-error"
+            *ngIf="emailVar.errors?.email &&
+                   (emailVar.touched || submitted)"  >
+            EmailNotValid
+          </span>
+          <span
+          class="help-block has-error"
+          *ngIf="emailExist && emailVar.valid"  >
+          Email already exist. Please try another email.
+        </span>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-sm-6">
+        <div
+          class="form-group"
+          [ngClass] ="{ 'has-error': skypeVar.invalid &&
+                                                       (skypeVar.touched || submitted) }"
+        >
+          <div>
+            <label class="control-label" for="skype"
+              >Skype_No <span class="redColor">*</span></label
+            >
+          </div>
+          <div>
+            <input
+              type="text"
+              id="skype"
+              name="skype"
+              #skypeVar='ngModel'
+              [(ngModel)]="userDetail.Skype"
+              class="form-control fontsize12"
+              placeholder="SkypePlaceHolder"
+              required
+            />
+          </div>
+          <div class="clearfix"></div>
+          <span
+            class="help-block has-error"
+            ng-show="skypeVar.invalid &&
+                      (skypeVar.touched || submitted)">
+            SkypeValidError
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div
+          class="form-group"
+          [ngClass]="{ 'has-error': (telephoneVar.invalid || codeVar.invalid) && (telephoneVar.touched || submitted)}"
+        >
+          <label class="control-label " for="telephoneCode"
+            >Telephone No <span class="redColor">*</span></label
+          >
+          <div class="col-sm-12 paddingboth">
+            <div class="col-sm-4 paddingleft">
+              <input
+                type="text"
+                name='phoneCode'
+                #codeVar='ngModel'
+                [(ngModel)]="phoneCode"
+                class="form-control fontsize12"
+                required
+
+              />
+            </div>
+            <div class="col-sm-8 paddingboth">
+              <input
+                type="text"
+                id="telephone"
+                name="telephone"
+                #telephoneVar='ngModel'
+                [(ngModel)]="userDetail.TelephoneNo"
+                class="form-control fontsize12"
+                placeholder="TelephonePlaceholder"
+                required
+              />
+            </div>
+            <div class="clearfix"></div>
+            <span
+              class="help-block has-error"
+              *ngIf="(telephoneVar.invalid || codeVar.invalid) &&
+                                          (telephoneVar || submitted)">
+              TelephoneValidationError
+            </span>
+
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="control-label " for="mobileCode">Mobile No.</label>
+          <div class="col-sm-12 paddingboth">
+            <div class="col-sm-4 paddingleft">
+              <input
+                type="text"
+                ng-model="code"
+                class="form-control fontsize12"
+                readonly
+                name="mobileCode"
+              />
+            </div>
+            <div class="col-sm-8 paddingboth">
+              <input
+                type="text"
+                id="mobile"
+                name="mobile"
+                ng-model="userDetail.MobileNo"
+                class="form-control fontsize12"
+                placeholder="MobilePlaceholder"
+              />
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-sm-6">
+        <div
+          class="form-group"
+          [ngClass]="{ 'has-error': roleVar.invalid && (roleVar.touched || submitted) }"
+        >
+          <div>
+            <label class="control-label" for="role"
+              >System Role <span class="redColor">*</span></label
+            >
+          </div>
+          <div>
+            <select
+              id="frayteRole"
+              name="frayteRole"
+              #roleVar='ngModel'
+              [(ngModel)]="userDetail.RoleId"
+              class="form-control fontsize12"
+              required >
+              <option value="null" disabled selected class="display-none">RoleSelectedOption</option>
+                <option *ngFor="let role of roles" [value]="role.RoleId">
+                  {{ role.DisplayName }}
+                </option>
+            </select>
+            <pre>{{userDetail.RoleId}}</pre>
+          </div>
+          <div class="clearfix"></div>
+          <span
+            class="help-block has-error"
+            ng-show="roleVar.invalid &&
+                      (roleVar.touched || submitted)"
+          >
+            RoleValidError
+          </span>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <!-- <div class="col-sm-6">
+        <div
+          class="form-group"
+          [ngClass]="{ 'has-error': timezoneVar.invalid &&
+                                                   (timezoneVar.touched || submitted) }"  >
+          <label class="control-label" for="timeZone" >TimeZone <span class="redColor">*</span></label>
+          <div id="Xe">
+            <select
+              id="timeZone"
+              name="timeZone"
+              #timezoneVar ='ngModel'
+              [(ngModel)]="userDetail.Timezone"
+              ng-change="SetCountryPhoneCodeIssue(userDetail.Timezone)"
+              ng-options="TimeZone.OffsetShort + ' - ' + TimeZone.Name  for TimeZone in timezones | orderBy:'Offset' track by TimeZone.TimezoneId"
+              class="form-control fontsize12"
+              required >
+              <option value="null" disabled selected class="display-none">TimeZoneSelectedOption</option>
+              <option *ngFor="let timezone of timezones" [value]="timezone">
+                {{ timezone.OffsetShort + ' - ' + timezone.Name  }}
+              </option>
+            </select>
+            <span
+              class="help-block has-error" *ngIf="timezoneVar.invalid && (timezoneVar.touched || submitted)" >
+              TimeZoneValidationError
+            </span>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div> -->
+      <div class="col-sm-6">
+        <div
+          class="form-group"
+          [ngClass]="{ 'has-error': positionVar.invalid &&
+                                                    (positionVar.touched || submitted) }"
+        >
+          <div>
+            <label class="control-label" for="position"
+              >Position <span class="redColor">*</span></label
+            >
+          </div>
+          <div>
+            <input
+              type="text"
+              id="position"
+              name="position"
+              #positionVar='ngModel'
+              [(ngModel)]="userDetail.Position"
+              class="form-control fontsize12"
+              placeholder="PositionPlaceHolder"
+              required
+            />
+          </div>
+          <div class="clearfix"></div>
+          <span
+            class="help-block has-error"
+            *ngIf="positionVar.invalid &&
+                      (positionVar.touched || submitted)"
+          >
+            PositionValidError
+          </span>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <!--Associate Frayte User-->
+  <div class="card card-default">
+    <div class="card-heading pointer" ng-click="ShowHideFrayteusercard()">
+      <div class="floatLeft">
+        <span
+          ><i
+            ng-class="{'fa fa-plus-square-o' : !ShowFrayteusercard, 'fa fa-minus-square-o' : ShowFrayteusercard}"
+            style="font-size: 20px; padding: 1px 10px 0px 0px; float: left;"
+          ></i></span
+        ><span>Manager Detail</span>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="card-body">
+      <div class="associateFrayteTable">
+        <div>
+          <div class="colHeader width18-4">Type</div>
+          <div class="colHeader width18-4">Name</div>
+          <div class="colHeader width18-4">Email</div>
+          <div class="colHeader width18-4">TelephoneNo</div>
+          <div class="colHeader width18-4">WorkingHrs</div>
+          <div class="colHeader width8">Remove</div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="card-body">
+          <div>
+            <div class="colCell  width18-4">
+              <input type="text" placeholder="Manager" readonly />
+            </div>
+            <div class="colCell  width18-4 container-fluid">
+              <div class="row">
+                <div class="col-sm-12">
+                  <input
+                    type="text"
+                    [(ngModel)]="userDetail.UserId"
+                    placeholder="LineManagerPlaceHolder"
+name='manger'
+                  />
+                  <!--  [ngbTypeahead]="searchUsers" [resultFormatter]="userFormatter" [inputFormatter]="userFormatter" -->
+                </div>
+              </div>
+            </div>
+            <div class="colCell width18-4">
+              <input
+                type="text"
+                ng-model="userDetail.ManagerUser.Email"
+                placeholder="Email"
+                readonly
+              />
+            </div>
+            <div class="colCell width18-4">
+              <input
+                type="text"
+                ng-model="userDetail.ManagerUser.TelephoneNo"
+                placeholder="TelephoneNo"
+                readonly
+                name='telephone'
+              />
+            </div>
+            <div class="colCell width8" style="padding: 7px 25px !important;">
+              <i
+                class="fa fa-bitbucket redColor pointer"
+                ng-disabled="userDetail.ManagerUser === null || userDetail.ManagerUser.UserId === null || userDetail.ManagerUser.UserId === 0"
+                ng-click="ManagerDetailEmpty(userDetail.ManagerUser)"
+                aria-hidden="true"
+                style="font-size:20px !important;"
+              ></i>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  <!--OfficeAddress-->
+  <div class="card card-default">
+    <div class="card-heading">Office Address</div>
+    <div class="card-body">
+      <div class="col-sm-6">
+        <div
+          class="form-group"
+          [ngClass] ="{ 'has-error': addressVar.invalid &&
+                                                       (addressVar.touched || submitted) }">
+          <label class="control-label" for="address"
+            >Address_1<span class="redColor">*</span></label
+          >
+          <div>
+            <textarea
+              cols="1"
+              rows="2"
+              id="address"
+              name="address"
+              #addressVar='ngModel'
+              [(ngModel)]="userDetail.Address.Address"
+              class="form-control fontsize12"
+              placeholder="AddressPlaceholder"
+              required
+            ></textarea>
+            <span
+              class="help-block has-error"
+              *ngIf ="addressVar.invalid &&
+                                          (addressVar.touched || submitted)" >
+              AddressValidationError
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="control-label" for="address2">Address_2</label>
+          <div>
+            <textarea
+              cols="1"
+              rows="2"
+              id="address2"
+              name="address2"
+              [(ngModel)]="userDetail.Address.Address2"
+              class="form-control fontsize12"
+              placeholder="Address2"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-sm-6">
+        <div
+          class="form-group"
+          [ngClass] ="{ 'has-error': cityVar.invalid &&
+                                                       (cityVar.touched || submitted) }"
+        >
+          <label class="control-label" for="city"
+            >City <span class="redColor">*</span></label
+          >
+          <div>
+            <input
+              type="text"
+              id="city"
+              name="city"
+              #cityVar ='ngModel'
+              [(ngModel)]="userDetail.Address.City"
+              class="form-control fontsize12"
+              placeholder="CityPlaceholder"
+              required
+            />
+            <span
+              class="help-block has-error"
+              *ngIf ="cityVar.invalid &&
+                                          (cityVar.touched || submitted)">
+              CityValidationError
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="control-label" for="suburb">Suburb</label>
+          <div>
+            <input
+              type="text"
+              id="suburb"
+              name="suburb"
+              capitalize-first
+              ng-model="userDetail.UserAddress.Suburb"
+              class="form-control fontsize12"
+              placeholder="Suburb"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf='userDetail.Address.Country.Code !== "GBR" && userDetail.Address.Country.Code !== "HKG"'>
+        <div
+          class="form-group"
+          [ngClass]="{ 'has-error': stateVar.invalid &&
+                                                       (stateVar.touched || submitted) }"
+        >
+          <label class="control-label" for="state"
+            >State <span class="redColor">*</span></label
+          >
+          <div>
+            <input
+              type="text"
+              id="state"
+              name="state"
+              #stateVar='ngModel'
+              [(ngModel)]="userDetail.Address.State"
+              class="form-control fontsize12"
+              placeholder="StatePlaceholder"
+              [required]='userDetail.Address.Country.Code !== "GBR" && userDetail.Address.Country.Code !== "HKG"'
+            />
+            <span
+              class="help-block has-error"
+              *ngIf ="( stateVar.invalid &&
+                                          (stateVar.touched || submitted))"
+            >
+              StateValidationError
+            </span>
+            <pre>{{stateVar.valid}}</pre>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf='userDetail.Address.Country.Code !== "HKG"'>
+        <div
+          class="form-group"
+          [ngClass]="{ 'has-error': postalCodeVar.invalid &&
+                                                       (postalCodeVar.touched || submitted) }">
+          <label class="control-label" for="postalCode"
+            >PostalCode <span class="redColor">*</span></label>
+          <div>
+            <input
+              type="text"
+              id="postalCode"
+              name="postalCode"
+              #postalCodeVar='ngModel'
+              class="form-control fontsize12"
+              placeholder="PostalCodePlaceholder"
+              [(ngModel)]='userDetail.Address.PostCode'
+              [required]='userDetail.Address.Country.Code !== "HKG"'
+            />
+            <span
+              class="help-block has-error"
+              *ngIf="postalCodeVar.invalid && (postalCodeVar.touched || submitted)"
+            >
+              PostalCodeValidationError
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="modal-footer">
+    <div>
+      <span class="floatLeft">
+        <a
+          href=""
+          ng-click="UserGoBack()"
+          class="btn-simple btn-cancel fontsize12"
+          ><i class="fa fa-times" aria-hidden="true"></i>Cancel</a
+        >
+      </span>
+      <div class="floatRight">
+        <button
+          type="submit"
+          class="btn-simple btn-save fontsize12">
+          <i class="fa fa-floppy-o" aria-hidden="true"></i> &nbsp;Save
+        </button>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</form>
