@@ -342,6 +342,9 @@
   </div>
   <!--end-->
 
+
+  <!--USer Code -->
+
   <!--right sidebar code-->
   <div class="col-sm-10 col-sm-offset-2 e-s" [ngClass]="{ 'f-w': !on }">
     <div class="col-sm-12">
@@ -359,13 +362,13 @@
         <div class="col-sm-12">
           <ul class="list-unstyled bold" id="table-header">
             <li><input type="checkbox" /></li>
-            <li>Date</li>
-            <li>Number</li>
-            <li>Ref #</li>
-            <li>Partner</li>
-            <li>Journal</li>
-            <li>Total</li>
-            <li>Status</li>
+            <li>Name</li>
+            <li>RoleDisplay</li>
+            <li>Email</li>
+            <li>Telephone</li>
+            <li>ManagerName</li>
+            <li>ManagerEmail</li>
+            <li></li>
           </ul>
         </div>
         <!--end-->
@@ -376,16 +379,17 @@
         <ul
           class="list-unstyled"
           id="table-body"
-          *ngFor="let item of productDataDetail"
+          *ngFor="let item of activeUsers"
         >
           <li><input type="checkbox" /></li>
-          <li>{{ item.date }}</li>
-          <li>{{ item.number }}</li>
-          <li>{{ item.ref }}</li>
-          <li>{{ item.partner }}</li>
-          <li>{{ item.journal }}</li>
-          <li>{{ item.total }}</li>
-          <li>{{ item.status }}</li>
+          <li>{{ item.Name }}</li>
+          <li>{{ item.RoleDisplay }}</li>
+          <li>{{ item.Email }}</li>
+          <li>{{ item.Telephone }}</li>
+          <li>{{ item.ManagerName }}</li>
+          <li>{{ item.ManagerEmail }}</li>
+          <li><button type='button' class='btn btn-success' (click)='viewDetail(item.UserId)'>View Detail</button>
+            <button type='button' class='btn btn-default' (click)='deleteUser(item.UserId)'>Delete</button></li>
         </ul>
         <!--end-->
       </div>

@@ -41,6 +41,7 @@ import { SecurityModule } from './security/security.module';
 import { HttpClientModule } from '@angular/common/http';
 import { UserAddEditComponent } from './user/user-add-edit.component';
 import { SelectRequiredValidator } from './shared/select-required-validator.directive';
+import { CommonModalComponent } from './shared/common-modal.component';
 
 
 
@@ -70,7 +71,8 @@ import { SelectRequiredValidator } from './shared/select-required-validator.dire
     DyoCancelOrderComponent,
     ProductPipe,
     UserAddEditComponent,
-    SelectRequiredValidator
+    SelectRequiredValidator,
+    CommonModalComponent
   ],
   imports: [
     BrowserModule,
@@ -88,7 +90,8 @@ import { SelectRequiredValidator } from './shared/select-required-validator.dire
     BsDatepickerModule.forRoot()
   ],
   entryComponents: [
-    UserAddEditComponent
+    UserAddEditComponent,
+    CommonModalComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

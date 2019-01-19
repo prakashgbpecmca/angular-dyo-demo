@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpHeaders, HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { IInitials } from "./user";
+import { IInitials, ITrackUser, IUserGrid } from "./user";
 const httpOptions = {
   headers: new HttpHeaders({
     "Content-Type": "application/json"
@@ -26,16 +26,24 @@ export class UserService {
     return this.http.get<IInitials>(API_URL + "Master/Initials");
   }
   saveUpdateUser(model: any): Observable<any> {
-    return this.http.post<any>(API_URL + "Account/SaveUser", model, httpOptions);
+    return this.http.post<any>(
+      API_URL + "Account/SaveUser",
+      model,
+      httpOptions
+    );
   }
-  getUserList(model: any): Observable<any[]> {
-    return this.http.post<any>(API_URL + "/GetUsers", model);
+  getUserList(model: ITrackUser): Observable<IUserGrid[]> {
+    return this.http.post<IUserGrid[]>(API_URL + "Account/GetUsers", model);
   }
   getUser(id: any): Observable<any[]> {
     return this.http.get<any>(API_URL + "/GetUser");
   }
-  deleteUser(id: any): Observable<any[]> {
-    return this.http.get<any>(API_URL + "/DeleteUser");
+  deleteUser(userId: any): Observable<any> {
+    return this.http.get<any>(API_URL + "Account/DeleteUser", {
+      params: {
+        userId: userId
+      }
+    });
   }
   getActiveUsers(term: any): Observable<any[]> {
     return this.http.get<any[]>(API_URL + "/User/ActiveUsers", {

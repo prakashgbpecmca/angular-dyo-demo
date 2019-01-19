@@ -1,5 +1,20 @@
 export class User {}
 
+export interface ITrackUser {
+  UserId: number;
+  TakeRows: number;
+  CurrentPage: number;
+}
+export interface IUserGrid {
+  UserId: number;
+  Name: string;
+  Role: string;
+  RoleDisplay: string;
+  Email: string;
+  Telephone: string;
+  ManagerName: string;
+  ManagerEmail: string;
+}
 export interface IInitials {
   Countries: any[];
   CountryPostCodes: any[];
