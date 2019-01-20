@@ -26,47 +26,8 @@ export class UserAddEditComponent implements OnInit {
   setStateDisable = false;
   setZipDisable: false;
   emailExist: boolean;
-  userDetail: IUser ={
-    UserId: 0,
-    RoleId: 0,
-    CompanyName: "",
-    ContactFirstName: "",
-    ContactLastName: "",
-    Email: "",
-    PhoneNumber: "",
-    TelephoneNo: "",
-    MobileNo: "",
-    FaxNumber: "",
-    Timezone: {
-      TimezoneId: 0,
-      Name: ""
-    },
-    ShortName: "",
-    Position: "",
-    Skype: "",
-    IsActive: true,
-    CreatedOnUtc: new Date(),
-    CreatedBy: 0,
-    ProfileImage: "",
-    Address: {
-      Id: 0,
-      UserId: 0,
-      Phone: "",
-      Address: "",
-      Address2: "",
-      Area: "",
-      City: "",
-      State: "",
-      PostCode: "",
-      Country: {
-        CountryId: 0,
-        Name: "",
-        Code: "",
-        Code2: "",
-        TimezoneId: 0
-      }
-    }
-  };
+  userInfo: any;
+  userDetail: IUser;
   submitted = true;
   countries: any[];
   countryPhneCodes: any[];
@@ -91,6 +52,50 @@ export class UserAddEditComponent implements OnInit {
   };
 
   ngOnInit() {
+  this.userInfo = JSON.parse(localStorage.getItem('user'));
+
+  this.userDetail = {
+    UserId: 0,
+    RoleId: 0,
+    CompanyName: "",
+    ContactFirstName: "",
+    ContactLastName: "",
+    Email: "",
+    PhoneNumber: "",
+    TelephoneNo: "",
+    MobileNo: "",
+    FaxNumber: "",
+    Timezone: {
+      TimezoneId: 0,
+      Name: ""
+    },
+    ShortName: "",
+    Position: "",
+    Skype: "",
+    IsActive: true,
+    CreatedOnUtc: new Date(),
+    CreatedBy: this.userInfo.UserId,
+    UpdatedBy: this.userInfo.UserId,
+    ProfileImage: "",
+    Address: {
+      Id: 0,
+      UserId: 0,
+      Phone: "",
+      Address: "",
+      Address2: "",
+      Area: "",
+      City: "",
+      State: "",
+      PostCode: "",
+      Country: {
+        CountryId: 0,
+        Name: "",
+        Code: "",
+        Code2: "",
+        TimezoneId: 0
+      }
+    }
+  };
     this._userService.getActiveUsers(1).subscribe(
       data => {
         this.activeusers = data;

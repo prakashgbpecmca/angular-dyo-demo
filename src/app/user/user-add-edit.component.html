@@ -53,7 +53,7 @@
         >
           <div>
             <label class="control-label" for="contact"
-              >Contact <span class="redColor">*</span></label
+              >First Name <span class="redColor">*</span></label
             >
           </div>
           <div>
@@ -65,6 +65,7 @@
               [(ngModel)]="userDetail.ContactFirstName"
               class="form-control fontsize12"
               placeholder="ContactPlaceholder"
+              maxlength='100'
               required
             />
           </div>
@@ -72,6 +73,41 @@
           <span
             class="help-block"
             *ngIf="firstNameVar.invalid && (firstNameVar.touched|| submitted)"
+          >
+            ContactValidationError
+          </span>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-sm-6">
+        <div
+          class="form-group"
+          [ngClass]="{
+            'has-error':
+            firstlastNameVar.invalid && (firstlastNameVar.touched|| submitted)
+          }"
+        >
+          <div>
+            <label class="control-label" for="contactlast"
+              >Last Name <span class="redColor">*</span></label>
+          </div>
+          <div>
+            <input
+              type="text"
+              id="contactlast"
+              name="contactlast"
+              #firstlastNameVar="ngModel"
+              [(ngModel)]="userDetail.ContactLastName"
+              class="form-control fontsize12"
+              placeholder="ContactPlaceholder"
+              required
+              maxlength='100'
+            />
+          </div>
+          <div class="clearfix"></div>
+          <span
+            class="help-block"
+            *ngIf="firstlastNameVar.invalid && (firstlastNameVar.touched|| submitted)"
           >
             ContactValidationError
           </span>
@@ -202,7 +238,7 @@
                 #codeVar='ngModel'
                 [(ngModel)]="phoneCode"
                 class="form-control fontsize12"
-                required
+                required readonly
 
               />
             </div>
@@ -238,7 +274,7 @@
             <div class="col-sm-4 paddingleft">
               <input
                 type="text"
-                ng-model="code"
+                [(ngModel)]="phoneCode"
                 class="form-control fontsize12"
                 readonly
                 name="mobileCode"

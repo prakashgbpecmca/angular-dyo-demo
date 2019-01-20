@@ -42,6 +42,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserAddEditComponent } from './user/user-add-edit.component';
 import { SelectRequiredValidator } from './shared/select-required-validator.directive';
 import { CommonModalComponent } from './shared/common-modal.component';
+import { ForgetPasswordComponent } from './login/forget-password.component';
 
 
 
@@ -72,7 +73,8 @@ import { CommonModalComponent } from './shared/common-modal.component';
     ProductPipe,
     UserAddEditComponent,
     SelectRequiredValidator,
-    CommonModalComponent
+    CommonModalComponent,
+    ForgetPasswordComponent
   ],
   imports: [
     BrowserModule,

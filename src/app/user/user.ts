@@ -40,6 +40,7 @@ export interface IUser {
   IsActive: boolean;
   CreatedOnUtc: Date;
   CreatedBy: number;
+  UpdatedBy: number;
   ProfileImage: string;
   Address: IAddress;
 }

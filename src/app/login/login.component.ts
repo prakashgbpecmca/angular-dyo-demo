@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { User } from "../user/user";
 import { SecurityService } from "../security/security.service";
 import { UserLogin } from "./login";
+import { LoginService } from "./login.service";
 
 @Component({
   selector: "app-login",
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private _router: Router,
     private _fb: FormBuilder,
-    private _outh: SecurityService
+    private _outh: SecurityService,
+    private _logInService: LoginService
   ) {
     this.logo = "assets/logo.png";
   }
@@ -29,7 +31,21 @@ export class LoginComponent implements OnInit {
   user: UserLogin = new UserLogin();
 
   userScreen(): void {
+    this._logInService.loginUser(this.user).subscribe(
+      data => {
+        localStorage.setItem("user", JSON.stringify(data));
+
+        this._router.navigate(["/dyo"]);
+      },
+      error => {
+        console.log(error);
+      }
+    );
     //
+  }
+
+  fogetPaasword(): void {
+    this._router.navigate(["/forgetpassword"]);
   }
 
   onSubmit(): void {
@@ -39,7 +55,6 @@ export class LoginComponent implements OnInit {
           localStorage.setItem("token", JSON.stringify(data));
           this.userScreen();
           this.Ptk = data;
-          this._router.navigate(["/dyo"]);
         },
         error => {
           this.errorMessage = error;

@@ -9,7 +9,7 @@ import { NgbModal, NgbModalOptions } from "@ng-bootstrap/ng-bootstrap";
 import { UserAddEditComponent } from "./user-add-edit.component";
 import { UserService } from "./user.service";
 import { ITrackUser } from "./user";
-import { CommonModalComponent } from '../shared/common-modal.component';
+import { CommonModalComponent } from "../shared/common-modal.component";
 
 @Component({
   selector: "app-user",
@@ -133,19 +133,24 @@ export class UserComponent implements OnInit {
       let modalRef = this._modalService.open(CommonModalComponent, options);
       modalRef.componentInstance.type = "Confirmation";
       modalRef.componentInstance.context = this;
-      modalRef.componentInstance.message = 'Are you sure, you want to delete this user?';
-      modalRef.result.then( result => {
-        this._userService.deleteUser(id).subscribe(
-          data => {
-            console.log(data);
-          },
-          error => {
-            console.log(error);
-          }
-        );
-      }, reason => {
-        console.log(reason);
-      });
+      modalRef.componentInstance.message =
+        "Are you sure, you want to delete this user?";
+      modalRef.result.then(
+        result => {
+          this._userService.deleteUser(id).subscribe(
+            data => {
+              console.log(data);
+              this.getActiveUsers();
+            },
+            error => {
+              console.log(error);
+            }
+          );
+        },
+        reason => {
+          console.log(reason);
+        }
+      );
     }
   }
   viewDetail(id: number): void {
@@ -157,9 +162,8 @@ export class UserComponent implements OnInit {
       modalRef.result.then(function() {}, function() {});
     }
   }
-  ngOnInit() {
-    this.productDataDetail = this._service.productDataList();
 
+  getActiveUsers(): void {
     this._userService.getUserList(this.trackUser).subscribe(
       data => {
         this.activeUsers = data;
@@ -168,6 +172,11 @@ export class UserComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+  ngOnInit() {
+    this.productDataDetail = this._service.productDataList();
+    this.getActiveUsers();
+
     // !do not remove it
     this.on = false;
   }
