@@ -1,18 +1,13 @@
-import { Component, OnInit, TemplateRef } from "@angular/core";
-import { Router } from "@angular/router";
-import { setTheme } from "ngx-bootstrap/utils";
-import { BsModalService } from "ngx-bootstrap/modal";
-import { BsModalRef } from "ngx-bootstrap/modal/bs-modal-ref.service";
-import { IDashboard } from "../service/service";
-import { ServiceService } from "../service/service.service";
+import { Component, OnInit } from "@angular/core";
+import { Router } from '@angular/router';
+import { ServiceService } from '../service/service.service';
+import { IDashboard } from '../service/service';
 
 @Component({
-  selector: "app-customer",
-  templateUrl: "./customer.component.html",
-  styleUrls: ["./customer.component.less"]
+  selector: "app-as",
+  templateUrl: "/home.component.html"
 })
-export class CustomerComponent implements OnInit {
-  public modalRef: BsModalRef;
+export class HomeComponent implements OnInit {
   public user: string;
   public products: string;
   public logo: string;
@@ -31,10 +26,9 @@ export class CustomerComponent implements OnInit {
 
   constructor(
     private _router: Router,
-    private modalService: BsModalService,
     private _service: ServiceService
   ) {
-    setTheme("bs3"); // or 'bs4'
+    // !setTheme("bs3"); // or 'bs4'
     this.user = "assets/user.png";
     this.products = "assets/product.png";
     this.logo = "assets/logo.png";
@@ -90,13 +84,12 @@ export class CustomerComponent implements OnInit {
     alert("You have successfully Logout.");
     this._router.navigate(["/login"]);
   }
-  openModalWithClass(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(
-      template,
-      Object.assign({}, { class: "gray modal-lg" })
-    );
-  }
-
+  // openModalWithClass(template: TemplateRef<any>) {
+  //   this.modalRef = this.modalService.show(
+  //     template,
+  //     Object.assign({}, { class: "gray modal-lg" })
+  //   );
+  // }
   ngOnInit() {
     this.dashboard = this._service.dashboardData();
     this.on = false;

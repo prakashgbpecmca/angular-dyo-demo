@@ -1,6 +1,7 @@
-
-export interface IAccessUser{
-    UserId:number;
-    Name:string;
-    UserName:string;   
+export class Access {
+    constructor(
+        public WMSAccessModuleUser: any,
+        public AccessControlModule: any,
+        public UserId:number
+    ) {}
 }

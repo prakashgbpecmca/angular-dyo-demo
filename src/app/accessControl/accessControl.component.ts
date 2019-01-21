@@ -5,7 +5,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { IStore } from 'src/app/service/service';
 import { ServiceService } from 'src/app/service/service.service';
 import { Router } from '@angular/router';
-import { IAccessUser } from './access-control-model';
+
 import { AccessControlService } from './access-control.service';
 
 @Component({
@@ -33,8 +33,10 @@ export class AccessControlComponent implements OnInit {
   public accessControl:boolean;
   public on=true;
   public open:boolean;
-  public accessUser:IAccessUser[];
+  public accessUser:any = {};
+  public accessHasError:boolean;   
   public producted:IStore[];
+  
 
   constructor(private _service:ServiceService,private _accessControlService:AccessControlService ,private _router:Router,private modalService: BsModalService) {
     setTheme('bs3'); // or 'bs4'
@@ -107,11 +109,35 @@ export class AccessControlComponent implements OnInit {
       Object.assign({}, { class: 'gray modal-lg exl' })
     );
   }
-
+  
+ //Yogi Code Start
+  validateUser(value) {
+    if (value === '0') {
+      this.accessHasError = true;     
+    } else {
+      this.accessHasError = false;    
+    }
+    this._accessControlService.getAccessUserById(value)
+    .subscribe(data=>console.log(this.accessUser=data));
+  }
+  
+  AssignModuleScreen()
+  {
+    this._accessControlService.assignModuleToUser(this.accessUser)
+    .subscribe(
+      data=>console.log("Save Data",this.accessUser=data),
+      error=>console.log('Error',error)
+      );
+    
+ //End
+  }
   ngOnInit() {
-    this._accessControlService.getAccessUser()
+    //Start
+    this.accessHasError = true;
+    this._accessControlService.getAccessUserById('0')
     .subscribe(data=>console.log(this.accessUser=data));
     
+    //End
 
     this.producted=this._service.storeData();
     this.on=false;

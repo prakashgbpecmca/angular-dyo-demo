@@ -17,26 +17,52 @@ import { DyoMycartComponent } from "./dyo-item/dyo-mycart/dyo-mycart.component";
 import { DyoOrderPlacedComponent } from "./dyo-item/dyo-order-placed/dyo-order-placed.component";
 import { DyoOrderDetailComponent } from "./dyo-item/dyo-order-detail/dyo-order-detail.component";
 import { DyoCancelOrderComponent } from "./dyo-item/dyo-cancel-order/dyo-cancel-order.component";
-import { ForgetPasswordComponent } from './login/forget-password.component';
+import { ForgetPasswordComponent } from "./login/forget-password.component";
+import { HomeComponent } from "./home/home.component";
+import { DyoComponent } from './dyo-item/dyo.component';
 
 export const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: "full" },
   { path: "login", component: LoginComponent },
   { path: "forgetpassword", component: ForgetPasswordComponent },
-  { path: "customer", component: CustomerComponent },
-  { path: "user", component: UserComponent },
-  { path: "accessControl", component: AccessControlComponent },
-  { path: "product", component: ProductComponent },
-  { path: "rack", component: RackComponent },
-  { path: "warehouse", component: WarehouseComponent },
-  { path: "orders", component: OrdersComponent },
-  { path: "dyo", component: DyoItemComponent },
-  { path: "dyo-design", component: DyoProductComponent },
-  { path: "dyo-finish", component: DyoFinishComponent },
-  { path: "dyo-mycart", component: DyoMycartComponent },
-  { path: "dyo-orderPlaced", component: DyoOrderPlacedComponent },
-  { path: "dyo-orderDetail", component: DyoOrderDetailComponent },
-  { path: "dyo-cancelOrder", component: DyoCancelOrderComponent },
+  {
+    path: "home",
+    component: HomeComponent,
+    children: [
+      { path: "customer", component: CustomerComponent },
+      { path: "user", component: UserComponent },
+      {
+        path: "dyo", component: DyoComponent,
+        children: [
+          { path: "products", component: DyoItemComponent },
+          { path: "design", component: DyoProductComponent },
+          { path: "finish-product", component: DyoFinishComponent }
+        ]
+      }
+    ]
+  },
+  // { path: "customer", component: CustomerComponent },
+  // { path: "user", component: UserComponent },
+  // { path: "accessControl", component: AccessControlComponent },
+  // { path: "product", component: ProductComponent },
+  // { path: "rack", component: RackComponent },
+  // { path: "warehouse", component: WarehouseComponent },
+  // { path: "orders", component: OrdersComponent },
+  {
+    path: "dyo",
+    component: HomeComponent,
+    children: [
+      { path: "products", component: DyoItemComponent },
+      { path: "design", component: DyoProductComponent },
+      { path: "finish-product", component: DyoFinishComponent }
+    ]
+  },
+  // { path: "dyo-design", component: DyoProductComponent },
+  // { path: "dyo-finish", component: DyoFinishComponent },
+  // { path: "dyo-mycart", component: DyoMycartComponent },
+  // { path: "dyo-orderPlaced", component: DyoOrderPlacedComponent },
+  // { path: "dyo-orderDetail", component: DyoOrderDetailComponent },
+  // { path: "dyo-cancelOrder", component: DyoCancelOrderComponent },
 
   { path: "**", component: PageNotFoundComponent }
 ];

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IAccessUser } from './access-control-model';
+
 const API_URL = 'http://localhost:56269/AccessControl/';
 @Injectable({
   providedIn: 'root'
@@ -9,9 +9,20 @@ const API_URL = 'http://localhost:56269/AccessControl/';
 
 export class AccessControlService {
 
-  constructor(private http:HttpClient) { }
-  getAccessUser():Observable<IAccessUser[]>
+  constructor(private http:HttpClient) { }  
+
+  getAccessUserById(userId):Observable<any>
   {
-    return this.http.get<IAccessUser[]>(API_URL+"GetAllUser");
+    return this.http.get<any>(API_URL+"GetAllUser",{
+      params: {
+        userId: userId
+       
+      },
+
+    });
   }
+ assignModuleToUser(accessControlModule)
+ {
+   return this.http.post<any>(API_URL+"AssigneModule",accessControlModule)
+ }
 }

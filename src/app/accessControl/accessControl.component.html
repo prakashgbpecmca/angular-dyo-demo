@@ -9823,126 +9823,28 @@
             <div class="form-group"></div>
 
         </div>
-        <div class="clearfix form-group row">
-            <div class="col-sm-12">
-                {{accessUser|json}}
-                <div id="custom-dropdown" class="col-sm-3">
+        <div class="clearfix form-group row">               
+            <div class="col-sm-12">    
+                
+                <div id="custom-dropdown" class="col-sm-3" >
                     <ul class="list-unstyled">
-                        <li dropdown>
+                        <li dropdown [ngClass] ="{ 'has-error': accessHasError}">
                             <div class="clearfix">
-                                <select name="module" id="module" class="form-control">
-                                    <option>Select Customer</option>                                    
-                                    <option *ngFor="let access of accessUser" value="access.UserId">{{access.Name}}</option>
-                                    <option>ADIDAS SPORTS</option>
-                                </select>
-                                <!-- <input type="text" placeholder="Enter Module Name" class="form-control" (click)="drpClick()"> -->
-                            </div>
-                            <!-- <button id="button-basic1" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic" (click)="drpClick()"> Dropdown Data Show</button> -->
-                            <!-- <ul class="mt-drp7 list-unstyled" id="opened" *ngIf="open">
-                              <li>
-                                  <a class="dropdown-item">
-                                    <div class="open">
-                                            <div class="col-sm-12 clearfix paddingboth">
-                                               <label for="search">Search:</label>
-                                                <div class="form-group">
-                                                 <input type="search" placeholder="Search" class="form-control" autofocus>
-                                                 </div>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        <div class="panel panel-default m-b-0">
-                                            <div class="panel-heading clearfix">
-                                                <div id="pscroll-set">
-                                                <div class="col-sm-3">Supplier</div>
-                                                <div class="col-sm-3">Invoice Date</div>
-                                                <div class="col-sm-3">Responsible</div>
-                                                <div class="col-sm-3">Total</div>
-                                            </div>
-                                            </div>
-                                            <div class="panel-body" id="custom-scrollbar">
-                                            <div class="clearfix">
-                                               <div class="col-sm-3">Whytecliff Group Ltd.</div>
-                                               <div class="col-sm-3">01/05/2018</div>
-                                               <div class="col-sm-3">Verintita Chanapim (Tangmay - HKG)</div>
-                                               <div class="col-sm-3">350.00</div>
-                                               </div>
-                                               <div class="clearfix">
-                                                    <div class="col-sm-3">Whytecliff Group Ltd.</div>
-                                                    <div class="col-sm-3">01/05/2018</div>
-                                                    <div class="col-sm-3">Verintita Chanapim (Tangmay - HKG)</div>
-                                                    <div class="col-sm-3">350.00</div>
-                                                    </div>
-                                                    <div class="clearfix">
-                                                            <div class="col-sm-3">Whytecliff Group Ltd.</div>
-                                                            <div class="col-sm-3">01/05/2018</div>
-                                                            <div class="col-sm-3">Verintita Chanapim (Tangmay - HKG)</div>
-                                                            <div class="col-sm-3">350.00</div>
-                                                            </div>
-                                                            <div class="clearfix">
-                                                                    <div class="col-sm-3">Whytecliff Group Ltd.</div>
-                                                                    <div class="col-sm-3">01/05/2018</div>
-                                                                    <div class="col-sm-3">Verintita Chanapim (Tangmay - HKG)</div>
-                                                                    <div class="col-sm-3">350.00</div>
-                                                                    </div>
-                                                                    <div class="clearfix">
-                                                                            <div class="col-sm-3">Whytecliff Group Ltd.</div>
-                                                                            <div class="col-sm-3">01/05/2018</div>
-                                                                            <div class="col-sm-3">Verintita Chanapim (Tangmay - HKG)</div>
-                                                                            <div class="col-sm-3">350.00</div>
-                                                                            </div>
-                                                                            <div class="clearfix">
-                                                                                    <div class="col-sm-3">Whytecliff Group Ltd.</div>
-                                                                                    <div class="col-sm-3">01/05/2018</div>
-                                                                                    <div class="col-sm-3">Verintita Chanapim (Tangmay - HKG)</div>
-                                                                                    <div class="col-sm-3">350.00</div>
-                                                                                    </div>
-                                                                                    <div class="clearfix">
-                                                                                            <div class="col-sm-3">Whytecliff Group Ltd.</div>
-                                                                                            <div class="col-sm-3">01/05/2018</div>
-                                                                                            <div class="col-sm-3">Verintita Chanapim (Tangmay - HKG)</div>
-                                                                                            <div class="col-sm-3">350.00</div>
-                                                                                            </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                              </a>
-                            </li>
-                              </ul> -->
+                                <select name="module" id= "module" class="form-control" (change)="validateUser(accessUser.UserId)" #topic="ngModel"  [(ngModel)]=accessUser.UserId>
+                                    <option [value]="0">Select Customer</option>
+                                    <option *ngFor="let access of accessUser.WMSAccessModuleUser" [value]="access.UserId">
+                                        {{ access.Name }}                                        
+                                    </option>                                  
+                                </select>                                
+                            </div>                          
                         </li>
                     </ul>
                 </div>
                 <div class="col-sm-2 col-sm-offset-7">
-                    <button class="btn btn-md btn-primary pull-right" type="button">Update Access</button>
+                    <button class="btn btn-md btn-primary pull-right"(click)="AssignModuleScreen(accessUser)" [disabled]="accessHasError" type="button">Update Access</button>
                 </div>
             </div>
         </div>
-
-
-        <!-- <div class="row">
-                <div class="col-sm-12 form-group">
-                        <div class="header">
-                                <div class="page-heading">Product</div>
-                                </div>
-                </div>
-                <div class="form-group"></div>
-        </div>
-<div class="row">
-<div class="col-sm-3" *ngFor="let item of producted; let i=index">
-  <div class="panel panel-default" (click)="openModalWithClass(productData)">
-<div class="panel-body">
-<div class="form-group">
-<img [src]="products" class="img-responsive ma">
-</div>
-
-<h3>{{item.productName}}</h3>
-<p>{{item.productPrice}}</p>
-<p><small>{{item.description}}</small></p>
-</div>
-  </div>
-  </div>
-</div> -->
-
-
-
         <!--start landing page code here-->
         <section id="row">
             <div class="landingpage">
@@ -9950,105 +9852,18 @@
                     <div class="col-sm-12 odoo-orange paddingboth">
                         <div id="land-show">
                             <div class="col-sm-12 col-xs-12 paddingboth page-hide ">
-                                <div class="col-sm-3 col-xs-12 paddingTop15">
+                                <div class="col-sm-3 col-xs-12 paddingTop15" *ngFor="let accessmodule of accessUser.AccessControlModule">
                                     <div>
-                                        <input type="checkbox" class="checkbox-fix" />
+                                        <input type="checkbox" class="checkbox-fix" name="Ichecked" [(ngModel)]="accessmodule.Ichecked" />
                                     </div>
                                     <button class="col-sm-12 btn-link reded-color" routerLinkActive="active">
                                         <div class="width100">
-                                            <div class="col-sm-12 paddingboth"><span class="expand"><i class="fa fa fa-building-o fa-5x"
+                                            <div class="col-sm-12 paddingboth"><span class="expand"><i class={{accessmodule.ModuleClass}}
                                                         aria-hidden="true"></i></span></div>
-                                            <div class="col-sm-12 paddingboth fontsize12"><span class="expand top7">DYO
-                                                    Items</span></div>
+                                            <div class="col-sm-12 paddingboth fontsize12"><span class="expand top7">{{accessmodule.DisplayName}}</span></div>
                                         </div>
                                     </button>
                                 </div>
-                                <div class="col-sm-3 col-xs-12 paddingTop15">
-                                    <div>
-                                        <input type="checkbox" class="checkbox-fix" />
-                                    </div>
-                                    <button class="col-sm-12 btn-link reded-color" routerLinkActive="active">
-                                        <div class="width100">
-                                            <div class="col-sm-12 paddingboth"><span class="expand"><i class="fa fa fa-user fa-5x"
-                                                        aria-hidden="true"></i></span></div>
-                                            <div class="col-sm-12 paddingboth fontsize12"><span class="expand top7">Customers</span></div>
-                                        </div>
-                                    </button>
-                                </div>
-                                <div class="col-sm-3 col-xs-12 paddingTop15">
-                                    <div>
-                                        <input type="checkbox" class="checkbox-fix" />
-                                    </div>
-                                    <button class="col-sm-12 btn-link reded-color" routerLinkActive="active">
-                                        <div class="width100">
-                                            <div class="col-sm-12 paddingboth"><span class="expand"><i class="fa fa fa-files-o fa-5x"
-                                                        aria-hidden="true"></i></span></div>
-                                            <div class="col-sm-12 paddingboth fontsize12"><span class="expand top7">Users</span></div>
-                                        </div>
-                                    </button>
-                                </div>
-                                <div class="col-sm-3 col-xs-12 paddingTop15">
-                                    <div>
-                                        <input type="checkbox" class="checkbox-fix" />
-                                    </div>
-                                    <button class="col-sm-12 btn-link reded-color" routerLinkActive="active">
-                                        <div class="width100">
-                                            <div class="col-sm-12 paddingboth"><span class="expand"><i class="fa fa fa-calendar-check-o fa-5x"
-                                                        aria-hidden="true"></i></span></div>
-                                            <div class="col-sm-12 paddingboth fontsize12"><span class="expand top7">Products</span></div>
-                                        </div>
-                                    </button>
-                                </div>
-                                <div class="col-sm-3 col-xs-12 paddingTop15">
-                                    <div>
-                                        <input type="checkbox" class="checkbox-fix" />
-                                    </div>
-                                    <button class="col-sm-12 btn-link reded-color" routerLinkActive="active">
-                                        <div class="width100">
-                                            <div class="col-sm-12 paddingboth"><span class="expand"><i class="fa fa fa-wpforms fa-5x"
-                                                        aria-hidden="true"></i></span></div>
-                                            <div class="col-sm-12 paddingboth fontsize12"><span class="expand top7">Racks</span></div>
-                                        </div>
-                                    </button>
-                                </div>
-                                <div class="col-sm-3 col-xs-12 paddingTop15">
-                                    <div>
-                                        <input type="checkbox" class="checkbox-fix" />
-                                    </div>
-                                    <button class="col-sm-12 btn-link reded-color" routerLinkActive="active">
-                                        <div class="width100">
-                                            <div class="col-sm-12 paddingboth"><span class="expand"><i class="fa fa fa-search fa-5x"
-                                                        aria-hidden="true"></i></span></div>
-                                            <div class="col-sm-12 paddingboth fontsize12"><span class="expand top7">Warehouse</span></div>
-                                        </div>
-                                    </button>
-                                </div>
-                                <div class="col-sm-3 col-xs-12 paddingTop15">
-                                    <div>
-                                        <input type="checkbox" class="checkbox-fix" />
-                                    </div>
-                                    <button class="col-sm-12 btn-link reded-color" routerLinkActive="active">
-                                        <div class="width100">
-                                            <div class="col-sm-12 paddingboth"><span class="expand"><i class="fa fa fa-pie-chart fa-5x"
-                                                        aria-hidden="true"></i></span></div>
-                                            <div class="col-sm-12 paddingboth fontsize12"><span class="expand top7">Orders</span></div>
-                                        </div>
-                                    </button>
-                                </div>
-                                <div class="col-sm-3 col-xs-12 paddingTop15">
-                                    <div>
-                                        <input type="checkbox" class="checkbox-fix" />
-                                    </div>
-                                    <button class="col-sm-12 btn-link reded-color" routerLinkActive="active">
-                                        <div class="width100">
-                                            <div class="col-sm-12 paddingboth"><span class="expand"><i class="fa fa fa-file-text-o fa-5x"
-                                                        aria-hidden="true"></i></span></div>
-                                            <div class="col-sm-12 paddingboth fontsize12"><span class="expand top7">Access
-                                                    Control</span></div>
-                                        </div>
-                                    </button>
-                                </div>
-
                             </div>
                         </div>
                     </div>

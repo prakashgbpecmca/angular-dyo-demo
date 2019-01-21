@@ -49,7 +49,7 @@ export class UserAddEditComponent implements OnInit {
           : this.activeusers.filter(v => v.Name.indexOf(term) > -1).slice(0, 10)
       )
     );
-  };
+  }
 
   ngOnInit() {
   this.userInfo = JSON.parse(localStorage.getItem('user'));

@@ -7,8 +7,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
-
-import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginModule } from './login/login.module';
 
@@ -43,6 +41,9 @@ import { UserAddEditComponent } from './user/user-add-edit.component';
 import { SelectRequiredValidator } from './shared/select-required-validator.directive';
 import { CommonModalComponent } from './shared/common-modal.component';
 import { ForgetPasswordComponent } from './login/forget-password.component';
+import { HomeModule } from './home/home.module';
+import { HomeRoutingModule } from './home/home-routing.module';
+import { DyoComponent } from './dyo-item/dyo.component';
 
 
 
@@ -74,15 +75,16 @@ import { ForgetPasswordComponent } from './login/forget-password.component';
     UserAddEditComponent,
     SelectRequiredValidator,
     CommonModalComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+    DyoComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
+    HomeModule,
     LoginModule,
     SecurityModule,
     NgbModule.forRoot(),

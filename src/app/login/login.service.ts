@@ -15,9 +15,9 @@ export class LoginService {
   logout(): void {
     this.resetSecurityObject();
   }
-  forgetPassword(user: UserLogin): Observable<any> {
+  forgetPassword(model: UserLogin): Observable<any> {
     return this.http.post<any>(API_URL + "Account/ForgetPassword",
-    user);
+    model);
   }
 
   resetSecurityObject(): void {
