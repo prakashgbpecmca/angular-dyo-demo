@@ -27,15 +27,14 @@
             name="country"
               class="form-control"
               #countryVar = "ngModel"
-              (change)="SetCountryPhoneCodeIssue(userDetail.Address.Country)" appSelectValidator
-              [(ngModel)]="userDetail.Address.Country">
+              (change)="SetCountryPhoneCodeIssue(countryId)" appSelectValidator
+              [(ngModel)]="countryId">
               <option ngValue="null" selected disabled>Select Country</option>
-              <option *ngFor="let country of countries" [ngValue]="country">
+              <option *ngFor="let country of countries" [ngValue]="country.CountryId">
                 {{ country.Name }}
               </option>
             </select>
-            <pre>{{userDetail.Address.Country.Code}}</pre>
-            <pre>{{countryVar.errors |json}}</pre>
+            <pre>{{userDetail.Address.Country |json}}</pre>
             <span class="help-block has-error"
               *ngIf="countryVar.invalid &&(countryVar.touched || submitted)">
               Country is required
@@ -432,9 +431,8 @@
                 <div class="col-sm-12">
                   <input
                     type="text"
-                    [(ngModel)]="userDetail.UserId"
-                    placeholder="LineManagerPlaceHolder"
-name='manger'
+                    [(ngModel)]="userDetail.UserId" [ngbTypeahead]="searchUsers"
+                    placeholder="LineManagerPlaceHolder" name='manger'
                   />
                   <!--  [ngbTypeahead]="searchUsers" [resultFormatter]="userFormatter" [inputFormatter]="userFormatter" -->
                 </div>
@@ -569,7 +567,7 @@ name='manger'
           </div>
         </div>
       </div>
-      <div class="col-sm-6" *ngIf='userDetail.Address.Country.Code !== "GBR" && userDetail.Address.Country.Code !== "HKG"'>
+      <div class="col-sm-6" *ngIf='userDetail.Address.Country?.Code !== "GBR" && userDetail.Address.Country?.Code !== "HKG"'>
         <div
           class="form-group"
           [ngClass]="{ 'has-error': stateVar.invalid &&
@@ -587,7 +585,7 @@ name='manger'
               [(ngModel)]="userDetail.Address.State"
               class="form-control fontsize12"
               placeholder="StatePlaceholder"
-              [required]='userDetail.Address.Country.Code !== "GBR" && userDetail.Address.Country.Code !== "HKG"'
+              [required]='userDetail.Address.Country?.Code !== "GBR" && userDetail.Address.Country?.Code !== "HKG"'
             />
             <span
               class="help-block has-error"
@@ -600,7 +598,7 @@ name='manger'
           </div>
         </div>
       </div>
-      <div class="col-sm-6" *ngIf='userDetail.Address.Country.Code !== "HKG"'>
+      <div class="col-sm-6" *ngIf='userDetail.Address.Country?.Code !== "HKG"'>
         <div
           class="form-group"
           [ngClass]="{ 'has-error': postalCodeVar.invalid &&
@@ -616,7 +614,7 @@ name='manger'
               class="form-control fontsize12"
               placeholder="PostalCodePlaceholder"
               [(ngModel)]='userDetail.Address.PostCode'
-              [required]='userDetail.Address.Country.Code !== "HKG"'
+              [required]='userDetail.Address.Country?.Code !== "HKG"'
             />
             <span
               class="help-block has-error"

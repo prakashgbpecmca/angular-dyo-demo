@@ -47,62 +47,11 @@ export class UserComponent implements OnInit {
     private _userService: UserService,
     private _modalService: NgbModal
   ) {
-    setTheme("bs3"); // or 'bs4'
     this.user = "assets/user.png";
     this.products = "assets/product.png";
     this.logo = "assets/logo.png";
   }
 
-  customerOk() {
-    this.customer = !this.customer;
-  }
-
-  userOk() {
-    this.users = !this.users;
-  }
-
-  placeOrderOk() {
-    this.placeOrder = !this.placeOrder;
-  }
-
-  orderOk() {
-    this.order = !this.order;
-  }
-
-  warehouseOk() {
-    this.warehouse = !this.warehouse;
-  }
-
-  rackOk() {
-    this.rack = !this.rack;
-  }
-
-  productOk() {
-    this.product = !this.product;
-  }
-
-  accessControlOk() {
-    this.accessControl = !this.accessControl;
-  }
-
-  scrollActive() {
-    this.on = !this.on;
-  }
-
-  bell() {
-    this.bellActive = !this.bellActive;
-    this.shopActive = false;
-  }
-
-  shop() {
-    this.shopActive = !this.shopActive;
-    this.bellActive = false;
-  }
-
-  logout() {
-    alert("You have successfully Logout.");
-    this._router.navigate(["/login"]);
-  }
   openModalWithClass(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(
       template,
@@ -159,7 +108,9 @@ export class UserComponent implements OnInit {
       let modalRef = this._modalService.open(UserAddEditComponent, options);
       modalRef.componentInstance.type = "Edit";
       modalRef.componentInstance.UserId = id;
-      modalRef.result.then(function() {}, function() {});
+      modalRef.result.then(function() {
+        this.activeUsers();
+      }, function() {});
     }
   }
 

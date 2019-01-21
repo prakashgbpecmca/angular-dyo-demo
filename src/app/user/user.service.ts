@@ -27,16 +27,19 @@ export class UserService {
   }
   saveUpdateUser(model: any): Observable<any> {
     return this.http.post<any>(
-      API_URL + "Account/SaveUser",
-      model,
-      httpOptions
+      API_URL + "Account/RegisterUser",
+      model
     );
   }
   getUserList(model: ITrackUser): Observable<IUserGrid[]> {
     return this.http.post<IUserGrid[]>(API_URL + "Account/GetUsers", model);
   }
-  getUser(id: any): Observable<any[]> {
-    return this.http.get<any>(API_URL + "/GetUser");
+  getUser(userId: any): Observable<any> {
+    return this.http.get<any>(API_URL + "Account/GetUser", {
+      params: {
+        userId: userId
+      }
+    });
   }
   deleteUser(userId: any): Observable<any> {
     return this.http.get<any>(API_URL + "Account/DeleteUser", {
@@ -46,7 +49,7 @@ export class UserService {
     });
   }
   getActiveUsers(term: any): Observable<any[]> {
-    return this.http.get<any[]>(API_URL + "/User/ActiveUsers", {
+    return this.http.get<any[]>(API_URL + "/User/GetActiveUsers", {
       params: {
         term: term
       }
