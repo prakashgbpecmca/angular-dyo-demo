@@ -2,7 +2,13 @@ import { Component, OnInit } from "@angular/core";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { IProfile } from "./profile";
 import { ProfileService } from "./profile.service";
-import { FormBuilder, FormGroup, FormControl } from "@angular/forms";
+import {
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  Validators,
+  AbstractControl
+} from "@angular/forms";
 
 @Component({
   selector: "app-profile",
@@ -16,9 +22,9 @@ export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
   profileService: ProfileService;
   activeModal: NgbActiveModal;
-
+  submitted = false;
   constructor(
-   private fb: FormBuilder,
+    private fb: FormBuilder,
     _activeModal: NgbActiveModal,
     _profileService: ProfileService,
     private _fb: FormBuilder
@@ -37,20 +43,37 @@ export class ProfileComponent implements OnInit {
       }
     );
   }
-
+  onSubmit(): void {
+    //
+  }
   ngOnInit() {
-this.fb.group({
-});
-
-    this.profileForm = new FormGroup({
-      currentPassord: new FormControl(),
-      comparePassword: new FormGroup({
-        newPassword: new FormControl(),
-        confirmPassword: new FormControl()
-      })
+    this.profileForm = this.fb.group({
+      currentPassord: ["", [Validators.required]],
+      comparePassword: this.fb.group(
+        {
+          newPassword: ["", [Validators.required, Validators.minLength(8)]],
+          confirmPassword: ["", [Validators.required]]
+        },
+        { validator: matchPassword }
+      )
     });
+
     this.userInfo = localStorage.getItem("user");
     if (this.userInfo) {
     }
   }
+}
+
+function matchPassword(group: AbstractControl): { [key: string]: any | null } {
+  const newPasswordControl = group.get("newPassword");
+  const confirmPasswordControl = group.get("confirmPassword");
+  console.log(newPasswordControl);
+  console.log(confirmPasswordControl);
+  if (confirmPasswordControl.value && newPasswordControl.value) {
+    if (newPasswordControl.value === confirmPasswordControl.value) {
+      return null;
+    }
+    return { passwordMismatch: true };
+  }
+  return null;
 }

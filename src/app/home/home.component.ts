@@ -94,7 +94,7 @@ export class HomeComponent implements OnInit {
   openModalProfile(): void {
     let options: NgbModalOptions = { size: "lg" };
     let modalRef = this._modalService.open(ProfileComponent, options);
-    modalRef.componentInstance.UserId = this.userInfo.UserId;
+    modalRef.componentInstance.UserId = 1; // this.userInfo.UserId;
 
     modalRef.result.then(
       function() {
