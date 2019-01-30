@@ -3,8 +3,10 @@ import { Router } from '@angular/router';
 import { setTheme } from 'ngx-bootstrap/utils';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { NgbModal, NgbModalOptions } from "@ng-bootstrap/ng-bootstrap";
 import { IDyo } from '../dyo';
 import { DyoService } from '../dyo.service';
+import { MycartAddEditComponent } from './mycart-add-edit.component';
 
 @Component({
   selector: 'app-dyo-mycart',
@@ -36,13 +38,17 @@ export class DyoMycartComponent implements OnInit {
 
 
   
-  constructor(private _router:Router,private modalService: BsModalService, private _dyoService:DyoService) {
+  constructor(private _router:Router, private _dyoService:DyoService,private _modalService: NgbModal) {
     setTheme('bs3'); // or 'bs4'
     this.logo='assets/logo.png';
     this.user='assets/user.png';
   }
 
-
+  saveCollection(): void {
+    let options: NgbModalOptions = { size: 'lg', centered: true };
+    let modalRef = this._modalService.open(MycartAddEditComponent, options);
+    modalRef.result.then(function() {}, function() {});
+  }
 
   customerOk(){
     this.customer=!this.customer;
@@ -94,7 +100,7 @@ export class DyoMycartComponent implements OnInit {
 
  backDesign(){
    alert('You are back to design screen.');
-   this._router.navigate(['/dyo-design']);
+   this._router.navigate(['/dyo/design']);
  }
 
  forwardOrderPlaced(){
@@ -108,12 +114,6 @@ export class DyoMycartComponent implements OnInit {
     this._router.navigate(['/login']);
   }
   
-  openModalWithClass(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(
-      template,
-      Object.assign({}, { class: 'gray modal-md' })
-    );
-  }
       
   ngOnInit() {
     this.mycart=this._dyoService.mycart();

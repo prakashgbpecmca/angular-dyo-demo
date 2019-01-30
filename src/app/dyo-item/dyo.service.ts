@@ -7,31 +7,30 @@ import { IDyo } from './dyo';
 export class DyoService {
   stockItems():IDyo[]{
     return [
-      {id:1, name:'socks',stock:'Stock: 200 pcs', img:'assets/shock.png', active:true},
-      {id:2, name:'Man Training Tee',stock:'Stock: 200 pcs', img:'assets/shock.png', active:false},
-      {id:3, name:'JNR Training Tee',stock:'Stock: 200 pcs', img:'assets/shock.png', active:false},
-      {id:4, name:'Women Core Training Tee',stock:'200 pcs', img:'assets/shock.png', active:false},
-      {id:5, name:'Men Media Polo',stock:'Stock: 200 pcs', img:'assets/shock.png', active:false},
-      {id:6, name:'Women Media Polo',stock:'Stock: 200 pcs', img:'assets/shock.png', active:false},
-      {id:7, name:'Men Cotton Polo',stock:'Stock: 200 pcs', img:'assets/shock.png', active:false},
-      {id:8, name:'Men Elite Rugday Shorts',stock:'Stock: 200 pcs', img:'assets/shock.png', active:false},
-      {id:9, name:'JNR Elite Rugday Shorts',stock:'Stock: 200 pcs', img:'assets/shock.png', active:false},
-      {id:10, name:'Men Gym Shorts',stock:'Stock: 200 pcs', img:'assets/shock.png', active:false},
-      {id:11, name:'Women Gym Shorts',stock:'Stock: 200 pcs', img:'assets/shock.png', active:false},
-      {id:12, name:'Unisea Pullore Flear Hoodie',stock:'Stock: 200 pcs', img:'assets/shock.png', active:false},
-      {id:13, name:'JNR Pullore Flear Hoodie',stock:'Stock: 200 pcs', img:'assets/shock.png', active:false},
-      {id:14, name:'Chisea Wet Wether Traus Pant',stock:'Stock: 200 pcs', img:'assets/shock.png', active:false},
-      {id:15, name:'Men Dry Traus Pant',stock:'Stock: 200 pcs', img:'assets/shock.png', active:false}
+      {id:1, name:'Man Training Tee',stock:'Stock: 200 pcs', img:'assets/shock.png', active:false},
+      {id:2, name:'JNR Training Tee',stock:'Stock: 200 pcs', img:'assets/shock.png', active:false},
+      {id:3, name:'Women Core Training Tee',stock:'Stock: 200 pcs', img:'assets/shock.png', active:false},
+      {id:4, name:'Men Media Polo',stock:'Stock: 200 pcs', img:'assets/shock.png', active:false},
+      {id:5, name:'Women Media Polo',stock:'Stock: 200 pcs', img:'assets/shock.png', active:false},
+      {id:6, name:'Men Cotton Polo',stock:'Stock: 200 pcs', img:'assets/shock.png', active:false},
+      {id:7, name:'Men Elite Rugday Shorts',stock:'Stock: 200 pcs', img:'assets/shock.png', active:false},
+      {id:8, name:'JNR Elite Rugday Shorts',stock:'Stock: 200 pcs', img:'assets/shock.png', active:false},
+      {id:9, name:'Men Gym Shorts',stock:'Stock: 200 pcs', img:'assets/shock.png', active:false},
+      {id:10, name:'Women Gym Shorts',stock:'Stock: 200 pcs', img:'assets/shock.png', active:false},
+      {id:11, name:'Unisea Pullore Flear Hoodie',stock:'Stock: 200 pcs', img:'assets/shock.png', active:false},
+      {id:12, name:'JNR Pullore Flear Hoodie',stock:'Stock: 200 pcs', img:'assets/shock.png', active:false},
+      {id:13, name:'Chisea Wet Wether Traus Pant',stock:'Stock: 200 pcs', img:'assets/shock.png', active:false},
+      {id:14, name:'Men Dry Traus Pant',stock:'Stock: 200 pcs', img:'assets/shock.png', active:false}
     ]
   };
 
   printingStyle():IDyo[]{
     return[
-      {id:1, name:'Embroidery', active:true},
-      {id:2, name:'Get Printing', active:true},
-      {id:3, name:'Rubber Print', active:true},
-      {id:4, name:'Screen Printing', active:true},
-      {id:5, name:'Normal Printing', active:true}
+      {id:1, name:'Screen Print', active:true},
+      {id:2, name:'Embroidery', active:true},
+      {id:3, name:'Tramfix', active:true},
+      {id:4, name:'Thermo', active:true},
+      {id:5, name:'Gel Print', active:true}
     ]
   }
 
@@ -41,7 +40,14 @@ export class DyoService {
       {id:2, value:'2',active:true},
       {id:3, value:'3',active:true},
       {id:4, value:'4',active:true},
-      {id:5, value:'5',active:true}
+      {id:5, value:'5',active:true},
+      {id:6, value:'6',active:true},
+      {id:7, value:'7',active:true},
+      {id:8, value:'8',active:true},
+      {id:9, value:'9',active:true},
+      {id:10, value:'10',active:true},
+      {id:11, value:'11',active:true},
+      {id:12, value:'12',active:true}
     ]
   }
 
@@ -151,6 +157,13 @@ export class DyoService {
     return [
       {id:1, img:'assets/shirt/cart_img.png', product:'Men Polo Shirt', productNumber:'PD1C101825', name:'Sachin', number:10, extraSmall:2, small:4, medium:1, large:5, doubleExtraLarge:2, thripleExtraLarge:1, total:15, active:true},
       {id:2, img:'assets/shirt/cart_img.png', product:'Men Polo Shirt', productNumber:'PD1C101826', name:'Virat', number:12, extraSmall:1, small:4, medium:1, large:2, doubleExtraLarge:1, thripleExtraLarge:5, total:14, active:true}
+    ]
+  }
+
+  socksData():IDyo[]{
+    return[
+      {id:1, name:'Socks', stock:'Stock: 200 pcs', img:'assets/shock.png', active:true},
+      {id:2, name:'Socks', stock:'Stock: 200 pcs',  img:'assets/shock.png', active:true}
     ]
   }
   constructor() { }

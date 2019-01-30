@@ -176,14 +176,14 @@ this.dyoProductOk=false;
 
  backDesign(){
    alert('You are back to design screen.');
-   this._router.navigate(['/dyo-design']);
+   this._router.navigate(['/dyo/design']);
  }
 
 
 
  dyoMyCart(){
    alert('You have go to my cart screen.');
-   this._router.navigate(['/dyo-mycart']);
+   this._router.navigate(['/dyo/dyo-mycart']);
  }
 
    logout(){

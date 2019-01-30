@@ -26,19 +26,27 @@ export const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "forgetpassword", component: ForgetPasswordComponent },
   {
-    path: "home",
+    path: "",
     component: HomeComponent,
     children: [
       { path: "customer", component: CustomerComponent },
       { path: "user", component: UserComponent },
+      { path: "racks", component: RackComponent },
+      { path: "accessControl", component: AccessControlComponent },
+      { path: "product", component: ProductComponent },
+      { path: "rack", component: RackComponent },
+      { path: "warehouse", component: WarehouseComponent },
+      { path: "orders", component: OrdersComponent },
       {
         path: "dyo", component: DyoComponent,
         children: [
           { path: "products", component: DyoItemComponent },
           { path: "design", component: DyoProductComponent },
-          { path: "finish-product", component: DyoFinishComponent }
+          { path: "finish-product", component: DyoFinishComponent },
+          { path: "mycollection", component: DyoMycartComponent },
+          { path: "orderDetail", component: DyoOrderDetailComponent }
         ]
-      }
+      },     
     ]
   },
   // { path: "customer", component: CustomerComponent },
@@ -69,7 +77,7 @@ export const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { useHash: true, enableTracing: true })
+    RouterModule.forRoot(routes, { useHash: true })
   ],
   exports: [RouterModule]
 })

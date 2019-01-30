@@ -1,29 +1,23 @@
 
 
 
-<div class="col-sm-12 paddingboth t-50">
-    <div class="collapse navbar-collapse" id="myNavbar">
-
-
-    </div>
+<div class="col-sm-12 paddingboth">
 <!--right sidebar code-->
 <div class="col-sm-10 col-sm-offset-2 e-s" [ngClass]="{'f-w':!on}">
         <div class="col-sm-12">
         <div class="row fix-sticky">
 
-                <div class="form-group"></div>
-
-
+            <div class="form-group"></div>
             <div class="form-group"></div>
 
             <div class="col-sm-12 form-group">
                 <div class="form-group clearfix">
-                <div class="col-sm-4 col-sm-offset-4 text-center clearfix f-w-800">
-                <div class="page-heading header">DYO</div>
-                <div class="page-heading form-group">KIT CREATOR</div>
+                <div class="col-sm-6 col-sm-offset-3 text-center clearfix f-w-800">
+                <div class="page-heading header">Design Your Own (DYO) - Stock Range</div>
+                <!-- <div class="page-heading form-group">KIT CREATOR</div> -->
                 </div>
                 </div>
-                <div class="col-sm-4 col-sm-offset-4 text-center clearfix">
+                <div class="col-sm-6 col-sm-offset-3 text-center clearfix">
                     <div class="form-group clearfix">
                     <select class="form-control">
                         <option>Select Customer</option>
@@ -31,64 +25,65 @@
                         <option>Yue Sendrely</option>
                     </select>
                 </div>
-                <div class="form-group clearfix">
+                <!-- <div class="form-group clearfix">
                     <div class="header form-group">
                         <div class="page-heading uppercase">Select A Product To Customize</div>
                     </div>
-                </div>
+                </div> -->
                 </div>
                 <div class="clearfix"></div>
-                <!--view the stock image code with a button click-->
-                <div class="col-sm-12 form-group clearfix">
-                    <button type="button" class="btn btn-primary pull-right" (click)="onBack()">Back</button>
-                </div>
-                <!--end-->
-                <div class="clearfix"></div>
-
+                <br/>
                 <!--stock image code-->
-                <div class="form-group" *ngIf="!dyoProductOk">
-                    <div class="col-sm-2 form-group" id="dyo" *ngFor="let item of stockItem">
+                <!--dynasty stock range code-->
+                <div class="panel panel-primary">
+                    <div class="panel-heading" (click)="dynastyStockClick()"> Dynasty Stock Range <span class="pull-right"><i class="fa pointer" [ngClass]="{'fa-plus-square':!dynastyStock, ' fa-minus-square':dynastyStock}"></i></span></div>
+                    <div class="panel-body" *ngIf="dynastyStock">
+                    <div class="col-sm-3 form-group text-center" id="dyo" *ngFor="let item of stockItem">
+                            <div class="none">
                         <div class="form-group">
                         <img [src]="item.img" [title]="item.stock" [alt]="item.name" class="img-responsive img-circle" (click)="dyoProduct()">
+                        </div>
+                    <div class="form-group">
+                        <div class="f-18 bold">{{item.name}}</div>
                     </div>
-                    <div class="form-group text-left">
-                        <div class="f-18">{{item.name}}</div>
                     </div>
+                    <div class="block">{{item.stock}}</div>
+                </div>
+                </div>
+                </div>
+                <!--end-->
+                <!--sock range code-->
+                <div class="panel panel-primary">
+                    <div class="panel-heading" (click)="sockClick()"> Sock Range <span class="pull-right"><i class="fa pointer" [ngClass]="{'fa-plus-square':!sock, ' fa-minus-square':sock}"></i></span></div>
+                    <div class="panel-body" *ngIf="sock">
+                        <div id="showStock">
+                                <div class="col-sm-3 text-center" id="dyo" *ngFor="let item of socks">
+                                        <div class="none">
+                                    <div class="form-group">
+                                                <img [src]="item.img" [title]="item.stock" [alt]="item.name" class="img-responsive img-circle">
+                                                </div>
+                                            <div class="form-group">
+                                                <div class="f-18 bold">{{item.name}}</div>
+                                                <!-- <div class="f-18">{{item.stock}}</div> -->
+                                            </div>
+                                        </div>
+                                        <div class="block">{{item.stock}}</div>
+                                        </div>
+                                        
+                        </div>
                     </div>
                 </div>
-                <div class="clearfix"></div>
                 <!--end-->
-                <!--stock data code-->
-                <div class="form-group clearfix" id="dyo" *ngIf="dyoProductOk">
-                    <div class="col-sm-4 form-group">
-                    <div class="panel panel-primary" >
-                        <div class="panel-heading">1</div>
-                        <div class="panel-body">
-                                <div class="form-group col-sm-4">
-                                        <img [src]="shockImg" [title]="shockImg" [alt]="shockImg" class="img-responsive img-circle">
-                                </div>
-                                <div class="col-sm-8">
-                            <h3><b>Product Name:</b> Shocks</h3>
-                            <div><b>Stock:</b> 200 pcs</div>
+                   <!--lionstar stock range code-->
+                   <div class="panel panel-primary">
+                       <div class="panel-heading" (click)="lionstarClick()"> Lionstar Stock Range <span class="pull-right"><i class="fa pointer" [ngClass]="{'fa-plus-square':!lionstar, ' fa-minus-square':lionstar}"></i></span></div>
+                        <div class="panel-body" *ngIf="lionstar">
+                            <div class="form-group">
+                                <h3 class="text-center text-danger">No data available.</h3>
                             </div>
                         </div>
                     </div>
-                    </div>
-                    <div class="col-sm-4 form-group">
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">2</div>
-                                <div class="panel-body">
-                                        <div class="form-group col-sm-4">
-                                                <img [src]="shockImg" [title]="shockImg" [alt]="shockImg" class="img-responsive img-circle">
-                                        </div>
-                                        <div class="col-sm-8">
-                                    <h3><b>Product Name:</b> Shocks</h3>
-                                    <div><b>Stock:</b> 100 pcs</div>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
-                </div>
+                    <!--end-->
                 <!--end-->
             </div>
         </div>

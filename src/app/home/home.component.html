@@ -1,3 +1,11 @@
+
+<!--toaster code-->
+<!-- <div class="toaster toaster-default">
+        <div>Thanks for visting this website.</div>
+    </div> -->
+    <!--end-->
+
+
 <!--navbar code here-->
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
@@ -7,12 +15,20 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" [routerLink]="['/dyo']"><img [src]="logo" [alt]="logo" class="img-responsive fix-logo"></a>
+        <a class="navbar-brand" [routerLink]="['/dyo/products']"><img [src]="logo" [alt]="logo" class="img-responsive fix-logo"></a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
+        <div id="ribbon-header">
+                    <ul class="nav navbar-nav navbar m-b-0">
+                        <li [routerLink]="['/dyo/products']"><a routerLinkActive="dyoActive">1. Product <span></span></a></li>
+                        <li [routerLink]="['/dyo/design']"><a routerLinkActive="dyoActive">2. Design <span></span></a></li>
+                        <li [routerLink]="['/dyo/finish-product']"><a routerLinkActive="dyoActive">3. Finished Product <span></span></a></li>
+                    </ul>
+                </div>
+
         <ul class="nav navbar-nav navbar-right">
           <li>
-              <a class="pointer" (click)="shop()"><i class="fa fa-shopping-cart fa-2x t-1" aria-hidden="true"></i> <span class="badge danger set-bell">4</span></a>
+              <a class="pointer" (click)="shop()"><i class="fa fa-bookmark-o fa-2x t-1" aria-hidden="true"></i> <span class="badge danger set-bell">4</span></a>
             <div class="profileDrp" *ngIf="shopActive">
                 <ul class="list-unstyled">
                     <li class="list-group-item text-center"><span class="bold">Your Cart's</span></li>
@@ -56,90 +72,63 @@
           </li>
       </ul>
     <ul class="list-group">
-            <li class="list-group-item pointer" [routerLink]="['/dyo']">
-                    <div class="pointer bold"><i class="fa fa-users e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1">DYO Items</span></div>
+            <li class="list-group-item pointer" [routerLink]="['/dyo/products']">
+                    <div class="pointer bold"><i class="fa fa-users e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1"><i class="fa fa-users e-s-1 fa-2x"></i>  DYO Items</span></div>
                   </li>
-                  <li class="list-group-item pointer" [routerLink]="['/dyo-orderDetail']">
-                    <div class="pointer bold"><i class="fa fa-list-alt e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1">My Order</span></div>
+                  <li class="list-group-item pointer" [routerLink]="['/dyo/orderDetail']">
+                    <div class="pointer bold"><i class="fa fa-list-alt e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1"><i class="fa fa-list-alt e-s-1 fa-2x"></i>  My Order</span></div>
                   </li>
 
-        <li class="list-group-item pointer">
-          <div class="pointer bold"><i class="fa fa-users e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1" (click)="customerOk()">Customer <span class="caret"></span></span></div>
+        <!-- <li class="list-group-item pointer">
+          <div class="pointer bold"><i [routerLink]="['/customer']" class="fa fa-users e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1" (click)="customerOk()"><i class="fa fa-users e-s-1 fa-2x"></i> Customer <span class="caret"></span></span></div>
           <div *ngIf="customer" class="t-i-15">
               <div class="form-group"></div>
               <div class="form-group pointer" [routerLink]="['/customer']">View Customers</div>
-              <div class="form-group pointer">Filter Customers</div>
-              <div class="form-group pointer">Add New Customer</div>
-              <div class="form-group pointer">Assigned Sales</div>
-              <div class="form-group pointer">Deactivate Customer</div>
-              <div class="pointer">Action to view logo library</div>
           </div>
-        </li>
+        </li> -->
 
         <li class="list-group-item pointer">
-            <div class="pointer bold"><i class="fa fa-user e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1" (click)="userOk()">User <span class="caret"></span></span></div>
+            <div class="pointer bold"><i [routerLink]="['/user']" class="fa fa-user e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1" (click)="userOk()"><i class="fa fa-user e-s-1 fa-2x"></i> User <span class="caret"></span></span></div>
             <div *ngIf="users" class="t-i-15">
                 <div class="form-group"></div>
                 <div class="form-group pointer" [routerLink]="['/user']">View Users</div>
-                <div class="form-group pointer">Filter users</div>
-                <div class="form-group pointer">Add New User</div>
-                <div class="form-group pointer">Deactivate Customer</div>
-                <div class="pointer">Resend user password</div>
             </div>
           </li>
 
-          <li class="list-group-item pointer">
-              <div class="pointer bold"><i class="fa fa-cog e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1" (click)="accessControlOk()">Access Control <span class="caret"></span></span></div>
+          <!-- <li class="list-group-item pointer">
+              <div class="pointer bold"><i  [routerLink]="['/accessControl']" class="fa fa-cog e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1" (click)="accessControlOk()"><i class="fa fa-cog e-s-1 fa-2x"></i> Access Control <span class="caret"></span></span></div>
               <div *ngIf="accessControl" class="t-i-15">
                   <div class="form-group"></div>
-                  <div class="form-group pointer" [routerLink]="['/accessControl']">Add new screen</div>
-                  <div class="form-group pointer">Assign user to screen</div>
-                  <div class="pointer">View already assigned</div>
+                  <div class="form-group pointer" [routerLink]="['/accessControl']">Assign user to screen</div>
               </div>
-            </li>
+            </li> -->
 
             <li class="list-group-item pointer">
-                <div class="pointer bold"><i class="fa fa-product-hunt e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1" (click)="productOk()">Product <span class="caret"></span></span></div>
+                <div class="pointer bold"><i [routerLink]="['/product']" class="fa fa-product-hunt e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1" (click)="productOk()"><i class="fa fa-product-hunt e-s-1 fa-2x"></i> Product <span class="caret"></span></span></div>
                 <div *ngIf="product" class="t-i-15">
                     <div class="form-group"></div>
                     <div class="form-group pointer" [routerLink]="['/product']">View Products with stock</div>
-                    <div class="form-group pointer">View product per category</div>
-                    <div class="form-group pointer">Filter Products</div>
-                    <div class="form-group pointer">Add new product with warning level</div>
-                    <div class="form-group pointer">Deactivate product</div>
-                    <div class="form-group pointer">Print product barcode</div>
-                    <div class="form-group pointer">Define product categories</div>
-                    <div class="pointer">View warning</div>
                 </div>
               </li>
 
               <li class="list-group-item pointer">
-                  <div class="pointer bold"><i class="fa fa-rocket e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1" (click)="rackOk()">Rack <span class="caret"></span></span></div>
+                  <div class="pointer bold"><i [routerLink]="['/rack']" class="fa fa-rocket e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1" (click)="rackOk()"><i class="fa fa-rocket e-s-1 fa-2x"></i> Rack <span class="caret"></span></span></div>
                   <div *ngIf="rack" class="t-i-15">
                       <div class="form-group"></div>
                       <div class="form-group pointer" [routerLink]="['/rack']">View Rack</div>
-                      <div class="form-group pointer">Filter Rack</div>
-                      <div class="form-group pointer">Add New Block</div>
-                      <div class="form-group pointer">Add New Rack inside Block</div>
-                      <div class="form-group pointer">Add New Row inside Rack</div>
-                      <div class="form-group pointer">Print product barcode</div>
-                      <div class="pointer">View items count per Rack</div>
                   </div>
                 </li>
 
-                <li class="list-group-item pointer">
-                    <div class="pointer bold"><i class="fa fa-wikipedia-w e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1" (click)="warehouseOk()">Warehouse <span class="caret"></span></span></div>
+                <!-- <li class="list-group-item pointer">
+                    <div class="pointer bold"><i [routerLink]="['/warehouse']" class="fa fa-wikipedia-w e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1" (click)="warehouseOk()"><i class="fa fa-wikipedia-w e-s-1 fa-2x"></i> Warehouse <span class="caret"></span></span></div>
                     <div *ngIf="warehouse" class="t-i-15">
                         <div class="form-group"></div>
                         <div class="form-group pointer" [routerLink]="['/warehouse']">View warehouses</div>
-                        <div class="form-group pointer">Add warehouse</div>
-                        <div class="form-group pointer">Edit warehouse</div>
-                        <div class="pointer">Deactive warehouse</div>
                     </div>
-                  </li>
+                  </li> -->
 
-                  <li class="list-group-item pointer">
-                      <div class="pointer bold"><i class="fa fa-first-order e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1" (click)="orderOk()">Orders <span class="caret"></span></span></div>
+                  <!-- <li class="list-group-item pointer">
+                      <div class="pointer bold"><i [routerLink]="['/orders']" class="fa fa-first-order e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1" (click)="orderOk()"><i class="fa fa-first-order e-s-1 fa-2x"></i> Orders <span class="caret"></span></span></div>
                       <div *ngIf="order" class="t-i-15">
                           <div class="form-group"></div>
                           <div class="form-group pointer" [routerLink]="['/orders']">View Orders</div>
@@ -150,7 +139,7 @@
                           <div class="form-group pointer">Merchandiser acceptance</div>
                           <div class="pointer">Upload Merchandiser Sample</div>
                       </div>
-                    </li>
+                    </li> -->
 
       </ul>
     </div>

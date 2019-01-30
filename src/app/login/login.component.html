@@ -1,30 +1,48 @@
-
-
-
 <section>
-  <div class="col-sm-4 col-sm-offset-4" id="loginForm">
+    <div class="col-sm-4 col-sm-offset-4" id="loginForm">
+    <form (ngSubmit)="onSubmit(loginForm.valid)" #loginForm='ngForm' novalidate>
+      <div class="form-group">
+        <img [src]="logo" [alt]="logo" class="img-responsive" />
+      </div>
+      <div class="form-group" [ngClass]=" {'has-error':  userNameVar.invalid  || userNameVar.untouched &&  (userNameVar.touched || submitted) }">
+        <label for="username">Username:</label>
+        <input
+          type="username"
+          #userNameVar="ngModel"
+          [(ngModel)]="user.UserName"
+          class="form-control"
+          name="username"
+          autofocus required />
+        <span class="help-block has-error"
+        *ngIf="userNameVar.invalid || userNameVar.untouched  && (userNameVar.touched || submitted)">
+        Username is Required
+       </span>
+      </div>
+      <div class="form-group" [ngClass]="{ 'has-error': passwordVar.invalid || passwordVar.untouched &&  (passwordVar.touched || submitted) }">
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          #passwordVar="ngModel"
+          [(ngModel)]="user.Password"
+          class="form-control"
+          name="password"
+          autofocus required />
+        <span class="help-block"
+        *ngIf="passwordVar.invalid || passwordVar.untouched && (passwordVar.touched || submitted)">
+        Password is Required
+      </span>
+      </div>
 
-      <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
-        <div class="form-group">
-          <img [src]="logo" [alt]="logo" class="img-responsive">
-        </div>
-        <div class="form-group">
-          <label for="username">Username:</label>
-          <input type="username" [(ngModel)]='user.UserName' formControlName="username" class="form-control" autofocus>
-          <span class="text-danger" *ngIf="loginForm.get('username').invalid">Username is required.</span>
-        </div>
-        <div class="form-group">
-          <label for="password">Password:</label>
-          <input type="password" formControlName="password" [(ngModel)]='user.Password' class="form-control" autofocus>
-          <span class="text-danger" *ngIf="loginForm.get('password').invalid">Password is required.</span>
-        </div>
-      <div>
-              <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Submit</button> &nbsp;&nbsp;
+      <div class="clearfix">
+          <div class="pull-left btn-toolbar">
+              <button type="submit" (click)='submitted=true' class="btn btn-primary">Submit</button>
               <button type="reset" class="btn btn-danger">Clear</button>
+          </div>
+        <div class="pull-right">
+            <button type="button" (click)="fogetPaasword()" class="btn btn-link">Forget password</button>
+        </div>     
       </div>
-      <div>
-        <button type="button" (click)='fogetPaasword()' class="btn btn-danger" style='float:right'>Forget password</button>
-      </div>
-      </form>
-</div>
+
+    </form>
+  </div>
 </section>

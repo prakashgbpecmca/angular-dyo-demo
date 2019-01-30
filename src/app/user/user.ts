@@ -2,8 +2,11 @@ export class User {}
 
 export interface ITrackUser {
   UserId: number;
+  RoleId: number;
   TakeRows: number;
   CurrentPage: number;
+  FromDate: Date;
+  ToDate: Date;
 }
 export interface IUserGrid {
   UserId: number;
@@ -51,6 +54,7 @@ export interface IAddress {
   Phone: string;
   Address: String;
   Address2: string;
+  Address3: string;
   Area: string;
   City: string;
   State: string;

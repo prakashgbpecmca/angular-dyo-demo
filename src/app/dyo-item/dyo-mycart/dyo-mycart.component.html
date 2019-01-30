@@ -1,220 +1,9 @@
 
-<!--profile code here-->
-<ng-template #template>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Profile</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div class="col-sm-4 col-xs-12">
-      <div class="form-group">
-        <img [src]="user" class="img-responsive img-fix img-circle" />
-      </div>
-      <p class="text-center bold">ABL SPORTS</p>
-    </div>
-    <div class="col-sm-8 col-xs-12">
-      <div class="form-group">
-        <label for="driverName">User Name</label>
-        <div class="form-group">
-          <input type="text" class="form-control" value="ABL SPORTS" readonly />
-        </div>
-      </div>
 
-      <div class="form-group">
-        <label for="contactNumber">EmailId</label>
-        <div class="form-group">
-          <input type="email" class="form-control" value="abl_sport@gmail.com" readonly />
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="driverName">Password</label>
-        <div class="form-group">
-          <input type="password" class="form-control" value="123456" readonly />
-        </div>
-      </div>
-    </div>
-    <div class="clearfix"></div>
-  </div>
-  <div class="modal-footer">
-    <div class="form-group btn-toolbar">
-      <button type="button" class="btn btn-md btn-default form-group pull-left" (click)="modalRef.hide()">Cancel</button>
-      <button type="button" class="btn btn-md btn-success form-group pull-right">Save</button>
-    </div>
-  </div>
-</ng-template>
-<!--end-->
-  
-  <!--navbar code here-->
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span> 
-        </button>
-        <a class="navbar-brand" [routerLink]="['/dyo']"><img [src]="logo" [alt]="logo" class="img-responsive fix-logo"></a>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-              <!--ribbon code-->
-              <div id="ribbon-header">
-                  <ul class="nav navbar-nav navbar m-b-0">
-                      <li [routerLink]="['/dyo']"><a routerLinkActive="dyoActive">Product <span></span></a></li>
-                      <li [routerLink]="['/dyo-design']"><a routerLinkActive="dyoActive">Design <span></span></a></li>
-                      <li [routerLink]="['/dyo-finish']"><a routerLinkActive="dyoActive">Finished Product <span></span></a></li>
-                  </ul>
-                    </div>
-              <!--end-->
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-              <a class="pointer" (click)="shop()"><i class="fa fa-shopping-cart fa-2x t-1" aria-hidden="true"></i> <span class="badge danger set-bell">4</span></a>
-            <div class="profileDrp" *ngIf="shopActive">
-                <ul class="list-unstyled">
-                    <li class="list-group-item text-center"><span class="bold">Your Cart's</span></li>
-                    <li class="list-group-item"><span>Cart Item</span><span class="pull-right badge success">3</span></li>
-                    <li class="list-group-item"><span>Remove Item</span><span class="pull-right badge danger">1</span></li>
-                </ul>
-            </div>
-          </li>
-          <li>
-              <a class="pointer" (click)="bell()"><i class="fa fa-bell-o fa-2x t-1" aria-hidden="true"></i>  <span class="badge danger set-bell">4</span></a>
-            <div class="profileDrp" *ngIf="bellActive">
-                <ul class="list-unstyled">
-                    <li class="list-group-item"><span>Payment Success</span><span class="pull-right badge success">3</span></li>
-                    <li class="list-group-item"><span>Payment Pending</span><span class="pull-right badge danger">1</span></li>
-                </ul>
-            </div>
-          </li>
-              <li class="btn-group ptb-8" dropdown>
-                  <button id="button-basic" dropdownToggle type="button" class="btn btn-link dropdown-toggle"
-                          aria-controls="dropdown-basic">
-                          <span class="glyphicon glyphicon-user"></span> &nbsp; &nbsp; ABL SPORTS
-                  </button>
-                  <ul id="dropdown-basic" id="move" *dropdownMenu class="dropdown-menu"
-                      role="menu" aria-labelledby="button-basic">
-                    <li role="menuitem" routerLinkActive="active" class="pointer" (click)="openModalWithClass(template)"><a class="dropdown-item">Profile</a></li>
-                    <li role="menuitem" routerLinkActive="active" class="pointer"><a class="dropdown-item" (click)="logout()">Logout</a></li>
-                    </ul>
-                  </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <!--end-->
   
   
-  <div class="col-sm-12 paddingboth t-50">
-  <!--left sidebar code-->
-  <div class="col-sm-2 paddingboth e-s" id="ls-scroll" [ngClass]="{'w-n':!on}">
-  <ul class="list-unstyled m-b-0">
-      <li class="list-group-item pointer clearfix">
-            <i class="fa fa-2x pull-right" [ngClass]="{'fa-times':on, 'fa-align-left':!on}" (click)="scrollActive()"></i>
-      </li>
-  </ul>
-  <ul class="list-group">
-        <li class="list-group-item pointer" [routerLink]="['/dyo']">
-                <div class="pointer bold"><i class="fa fa-users e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1">DYO Items</span></div>
-              </li>
-              <li class="list-group-item pointer" [routerLink]="['/dyo-orderDetail']">
-                <div class="pointer bold"><i class="fa fa-list-alt e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1">My Order</span></div>
-              </li>
   
-    <li class="list-group-item pointer">
-      <div class="pointer bold"><i class="fa fa-users e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1" (click)="customerOk()">Customer <span class="caret"></span></span></div>
-      <div *ngIf="customer" class="t-i-15">
-          <div class="form-group"></div>
-          <div class="form-group pointer" [routerLink]="['/customer']">View Customers</div>
-          <div class="form-group pointer">Filter Customers</div>
-          <div class="form-group pointer">Add New Customer</div>
-          <div class="form-group pointer">Assigned Sales</div>
-          <div class="form-group pointer">Deactivate Customer</div>
-          <div class="pointer">Action to view logo library</div>
-      </div>
-    </li>
-  
-    <li class="list-group-item pointer">
-        <div class="pointer bold"><i class="fa fa-user e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1" (click)="userOk()">User <span class="caret"></span></span></div>
-        <div *ngIf="users" class="t-i-15">
-            <div class="form-group"></div>
-            <div class="form-group pointer" [routerLink]="['/user']">View Users</div>
-            <div class="form-group pointer">Filter users</div>
-            <div class="form-group pointer">Add New User</div>
-            <div class="form-group pointer">Deactivate Customer</div>
-            <div class="pointer">Resend user password</div>
-        </div>
-      </li>
-  
-      <li class="list-group-item pointer">
-          <div class="pointer bold"><i class="fa fa-cog e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1" (click)="accessControlOk()">Access Control <span class="caret"></span></span></div>
-          <div *ngIf="accessControl" class="t-i-15">
-              <div class="form-group"></div>
-              <div class="form-group pointer" [routerLink]="['/accessControl']">Add new screen</div>
-              <div class="form-group pointer">Assign user to screen</div>
-              <div class="pointer">View already assigned</div>
-          </div>
-        </li>
-  
-        <li class="list-group-item pointer">
-            <div class="pointer bold"><i class="fa fa-product-hunt e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1" (click)="productOk()">Product <span class="caret"></span></span></div>
-            <div *ngIf="product" class="t-i-15">
-                <div class="form-group"></div>
-                <div class="form-group pointer" [routerLink]="['/product']">View Products with stock</div>
-                <div class="form-group pointer">View product per category</div>
-                <div class="form-group pointer">Filter Products</div>
-                <div class="form-group pointer">Add new product with warning level</div>
-                <div class="form-group pointer">Deactivate product</div>
-                <div class="form-group pointer">Print product barcode</div>
-                <div class="form-group pointer">Define product categories</div>
-                <div class="pointer">View warning</div>
-            </div>
-          </li>
-  
-          <li class="list-group-item pointer">
-              <div class="pointer bold"><i class="fa fa-rocket e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1" (click)="rackOk()">Rack <span class="caret"></span></span></div>
-              <div *ngIf="rack" class="t-i-15">
-                  <div class="form-group"></div>
-                  <div class="form-group pointer" [routerLink]="['/rack']">View Rack</div>
-                  <div class="form-group pointer">Filter Rack</div>
-                  <div class="form-group pointer">Add New Block</div>
-                  <div class="form-group pointer">Add New Rack inside Block</div>
-                  <div class="form-group pointer">Add New Row inside Rack</div>
-                  <div class="form-group pointer">Print product barcode</div>
-                  <div class="pointer">View items count per Rack</div>
-              </div>
-            </li>
-  
-            <li class="list-group-item pointer">
-                <div class="pointer bold"><i class="fa fa-wikipedia-w e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1" (click)="warehouseOk()">Warehouse <span class="caret"></span></span></div>
-                <div *ngIf="warehouse" class="t-i-15">
-                    <div class="form-group"></div>
-                    <div class="form-group pointer" [routerLink]="['/warehouse']">View warehouses</div>
-                    <div class="form-group pointer">Add warehouse</div>
-                    <div class="form-group pointer">Edit warehouse</div>
-                    <div class="pointer">Deactive warehouse</div>
-                </div>
-              </li>
-  
-              <li class="list-group-item pointer">
-                  <div class="pointer bold"><i class="fa fa-first-order e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1" (click)="orderOk()">Orders <span class="caret"></span></span></div>
-                  <div *ngIf="order" class="t-i-15">
-                      <div class="form-group"></div>
-                      <div class="form-group pointer" [routerLink]="['/orders']">View Orders</div>
-                      <div class="form-group pointer">Filter Orders</div>
-                      <div class="form-group pointer">Update Order Tracking</div>
-                      <div class="form-group pointer">Tracking Detail</div>
-                      <div class="form-group pointer">Sales Coordinator acceptance</div>
-                      <div class="form-group pointer">Merchandiser acceptance</div>
-                      <div class="pointer">Upload Merchandiser Sample</div>
-                  </div>
-                </li>
-  
-  </ul>
-  </div>
-  <!--end-->
-  
+  <div class="col-sm-12 paddingboth">
   <!--right sidebar code-->
   <div class="col-sm-10 col-sm-offset-2 e-s" [ngClass]="{'f-w':!on}">
         <div class="col-sm-12">
@@ -225,16 +14,17 @@
  <!--my cart screen code-->
 <div>
   <div class="panel panel-primary">
-    <div class="panel-heading">My Cart</div>
+    <div class="panel-heading">My Collection <span class="text-right">View Saved Collection (3)</span></div>
     <div class="panel-body">
       <!--my cart detail code-->
       <div class="panel panel-default m-b-0">
         <div class="panel-heading clearfix">
           <div class="col-sm-2">Image</div>
-          <div class="col-sm-4">Product</div>
-          <div class="col-sm-3">Printed Name</div>
-          <div class="col-sm-1">Printed Number</div>
-          <div class="col-sm-2"></div>
+          <div class="col-sm-4">Product Name</div>
+          <div class="col-sm-3">Product Code</div>
+          <!-- <div class="col-sm-3">Printed Name</div> -->
+          <!-- <div class="col-sm-1">Printed Number</div> -->
+          <div class="col-sm-3"></div>
         </div>
         <div class="panel-body">
           <div class="clearfix" id="mycart-b-b" *ngFor="let item of mycart; let i=index">
@@ -242,12 +32,12 @@
             <img [src]="item.img" [alt]="item.product" [title]="item.product" class="img-responsive">
           </div>
           <div class="col-sm-4">
-            <h3>{{item.product}}</h3>
-            <p>{{item.productNumber}}</p>
+            <b>{{item.product}}</b>
+           
           </div>
-          <div class="col-sm-3 uppercase"><b>{{item.name}}</b></div>
-          <div class="col-sm-1">{{item.number}}</div>
-          <div class="col-sm-2 btn-toolbar center-block">
+          <div class="col-sm-3 uppercase"><b>{{item.productNumber}}</b></div>
+          <!-- <div class="col-sm-1">{{item.number}}</div> -->
+          <div class="col-sm-3 btn-toolbar center-block">
             <button type="button" class="btn btn-md btn-danger form-group"><i class="fa fa-times"></i> Delete</button>
             <button type="button" class="btn btn-md btn-primary form-group" (click)="backDesign()"><i class="fa fa-edit"></i> Edit</button>
           </div>
@@ -261,7 +51,7 @@
 <!--end-->
 
 <!--summary detail code-->
-<div class="row form-group" id="mycart-b-b">
+<!-- <div class="row form-group" id="mycart-b-b">
   <div class="col-sm-3 col-sm-offset-9 m-b-10">
     <div class="panel panel-primary m-b-0">
       <div class="panel-heading">Summary</div>
@@ -289,11 +79,11 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 <!--end-->
 
 <!--place order code-->
-<div class="row">
+<!-- <div class="row">
   <div class="col-sm-3 col-sm-offset-9 form-group">
     <div class="form-group">
       <div class="checkbox">
@@ -302,9 +92,22 @@
   </div>
     <button type="button" class="btn btn-md btn-primary form-control" (click)="forwardOrderPlaced()">PLACE ORDER</button>
   </div> 
-</div>
+</div> -->
 <!--end-->
-
+<div class="row" id="btn-finish">
+    <div class="col-sm-2 col-md-3 col-lg-3 form-group">
+        <button type="button" class="btn btn-md btn-danger form-control" (click)="saveCollection()">Save<br/>Collection</button>
+      </div>
+    
+      <div class="col-sm-2 col-md-3 col-lg-3 form-group">
+          <button type="button" class="btn btn-md btn-danger form-control">Download<br/>Job Sheet</button>
+          </div>
+          <div class="col-sm-2 col-md-3 col-lg-3 form-group"></div>
+          <div class="col-sm-2 col-md-3 col-lg-3 form-group">
+              <button type="button" class="btn btn-md btn-primary form-control">Place<br/>Order</button>
+              </div>
+            
+</div>
   </div>
         </div>
     

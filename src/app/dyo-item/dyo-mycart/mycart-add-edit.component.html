@@ -1,0 +1,20 @@
+<form name="collectionNameForm">
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Collection Name</h4>
+    <button type="button" class="close" aria-describedby="modal-title" (click)="_activeModal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <label for="enterCollectionName"> Enter Collection Name</label>
+      <div>
+        <input type="text" class="form-control" placeholder="Enter collection name" required />
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer clearfix">
+    <button type="button" class="btn btn-default pull-left" (click)="_activeModal.dismiss()">Cancel</button>
+    <button type="button" class="btn btn-primary pull-right" (click)="viewSaved()">Ok</button>
+  </div>
+</form>

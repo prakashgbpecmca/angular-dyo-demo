@@ -1,30 +1,29 @@
-<div class="col-sm-12 paddingboth t-50">
+<div class="col-sm-12 paddingboth">
 <!--right sidebar code-->
 <div class="col-sm-10 col-sm-offset-2 e-s" [ngClass]="{'f-w':!on}">
       <div class="col-sm-12">
       <div class="row fix-sticky">
-
               <div class="form-group"></div>
               <div class="row">
               <!--three-->
 <section>
-<div class="col-sm-3">
+<div class="w-30 col-sm-3">
 <div class="panel panel-primary">
-  <div class="panel-heading">ACTIONS</div>
+  <div class="panel-heading">EMBLISHMENTS</div>
   <div class="panel-body" id="img-scroll">
 <ul class="list-group">
-  <li class="list-group-item">Upload logo to desired location (.JPG, .GIF, .PNG)</li>
+  <li class="list-group-item"><b>Upload logo to desired location (.JPG, .GIF, .PNG)</b></li>
 <!--right chest-->
 <li class="list-group-item">
-    <div (click)="rightOk()" class="pointer">Right Chest <span class="caret"></span></div>
+    <div (click)="rightOk()" class="pointer"><b>1. Right Chest</b> <span class="pull-right"><i class="fa pointer" [ngClass]="{'fa-plus-square':!right, 'fa-minus-square':right}"></i></span></div>
     <div *ngIf="right">
         <div class="form-group">
           <div class="form-group"></div>
             <input type="file" class="filestyle" data-icon="false">
         </div>
-        <div class="text-right form-group">Select from Library</div>
+        <div class="text-right form-group"><a class="pointer">Select from Library</a></div>
         <div class="form-group clearfix">
-          <div class="form-group b-b"><b>Printing Style:</b></div>
+          <div class="form-group b-b"><b>Printing Method:</b></div>
           <div class="radio" *ngFor="let item of printingStyle; let i=index">
             <label><input type="radio" value="{{item.name}}" name="printing"> {{item.name}}</label>
           </div>
@@ -32,38 +31,73 @@
         <div class="form-group clearfix">
             <div class="form-group b-b"><b>Logo Dimensional:</b></div>
             <div class="row">
+              <div class="col-sm-4"><label for="width">Width (cm)</label></div>
+              <div class="col-sm-4"> <label for="height">Height (cm)</label></div>
+              <div class="col-sm-4"> <label for="aspectRatio">Aspect Ratio</label></div>
+              <div class="clearfix"></div>
             <div class="col-sm-4">
-              <label for="width">Width</label>
               <select name="width" id="width" class="form-control">
                 <option [value]="i" *ngFor="let item of logoDimension; let i=index">{{item.value}}</option>
               </select>
             </div>
             <div class="col-sm-4">
-                <label for="height">Height</label>
                 <select name="height" id="height" class="form-control">
                   <option [value]="i" *ngFor="let item of logoDimension; let i=index">{{item.value}}</option>
                 </select>
               </div>
-              <div class="col-sm-4">
-                  <label for="aspectRatio">Aspect Ratio</label>
-                    <input type="checkbox" class="aspectRatio"  />
+              <div class="col-sm-4 text-center">
+                    <input type="checkbox"  />
                 </div>
                 </div>
+        </div>
+        <div class="form-group clearfix">
+          <div class="form-group"></div>
+            <div class="form-group b-b"><b>Select Logo Color:</b></div>
+            <div class="form-group clearfix">
+                <div class="clearfix" id="selectColor">
+                  <div class="col-sm-4 t-5">Color</div>
+                  <div class="col-sm-8">
+                    <input type="text" (click)="isOpenColor()" class="i-c" />
+                    <div class="text-right"><small><a class="pointer">Add</a></small></div>
+                  </div>
+                  <!--color code show to hoever-->
+                  <div class="color" *ngIf="openColor">
+                      <div class="row">
+                          <div class="form-group col-sm-2" *ngFor="let item of color; let i=index">
+                              <input type="color" [value]="item.color" name="insertName">
+                            </div>
+                            </div>
+                  </div>
+                  <!--end-->
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="form-group">
+                  <input type="checkbox"> &nbsp;<b>Enter own color code</b>
+                </div>
+                <div class="clearfix">
+                  <div class="col-sm-4"><input type="color" class="i-c" /></div>
+                  <div class="col-sm-8">
+                    <input type="input" class="form-control" />
+                    <div class="text-right"><small><a class="pointer">Add</a></small></div>
+                  </div>
+                </div>
+              </div>
         </div>
     </div>
   </li>
   <!--end-->
   <!--left chest-->
   <li class="list-group-item">
-      <div (click)="leftOk()" class="pointer">Left Chest <span class="caret"></span></div>
+      <div (click)="leftOk()" class="pointer"><b>2. Left Chest</b> <span class="pull-right"><i class="fa pointer" [ngClass]="{'fa-plus-square':!left, 'fa-minus-square':left}"></i></span></div>
       <div *ngIf="left">
           <div class="form-group">
             <div class="form-group"></div>
               <input type="file" class="filestyle" data-icon="false">
           </div>
-          <div class="text-right form-group">Select from Library</div>
+          <div class="text-right form-group"><a class="pointer">Select from Library</a></div>
           <div class="form-group clearfix">
-            <div class="form-group b-b"><b>Printing Style:</b></div>
+            <div class="form-group b-b"><b>Printing Method:</b></div>
             <div class="radio" *ngFor="let item of printingStyle; let i=index">
               <label><input type="radio" value="{{item.name}}" name="printing"> {{item.name}}</label>
             </div>
@@ -71,38 +105,73 @@
           <div class="form-group clearfix">
               <div class="form-group b-b"><b>Logo Dimensional:</b></div>
               <div class="row">
+                <div class="col-sm-4"><label for="width">Width (cm)</label></div>
+                <div class="col-sm-4"> <label for="height">Height (cm)</label></div>
+                <div class="col-sm-4"> <label for="aspectRatio">Aspect Ratio</label></div>
+                <div class="clearfix"></div>
               <div class="col-sm-4">
-                <label for="width">Width</label>
                 <select name="width" id="width" class="form-control">
                   <option [value]="i" *ngFor="let item of logoDimension; let i=index">{{item.value}}</option>
                 </select>
               </div>
               <div class="col-sm-4">
-                  <label for="height">Height</label>
                   <select name="height" id="height" class="form-control">
                     <option [value]="i" *ngFor="let item of logoDimension; let i=index">{{item.value}}</option>
                   </select>
                 </div>
-                <div class="col-sm-4">
-                    <label for="aspectRatio">Aspect Ratio</label>
-                      <input type="checkbox" class="aspectRatio"  />
+                <div class="col-sm-4 text-center">
+                      <input type="checkbox"  />
                   </div>
                   </div>
           </div>
+          <div class="form-group clearfix">
+              <div class="form-group"></div>
+                <div class="form-group b-b"><b>Select Logo Color:</b></div>
+                <div class="form-group clearfix">
+                    <div class="clearfix" id="selectColor">
+                      <div class="col-sm-4 t-5">Color</div>
+                      <div class="col-sm-8">
+                        <input type="text" (click)="isOpenColor()" class="i-c" />
+                        <div class="text-right"><small><a class="pointer">Add</a></small></div>
+                      </div>
+                      <!--color code show to hoever-->
+                      <div class="color" *ngIf="openColor">
+                          <div class="row">
+                              <div class="form-group col-sm-2" *ngFor="let item of color; let i=index">
+                                  <input type="color" [value]="item.color" name="insertName">
+                                </div>
+                                </div>
+                      </div>
+                      <!--end-->
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="form-group">
+                      <input type="checkbox"> &nbsp;<b>Enter own color code</b>
+                    </div>
+                    <div class="clearfix">
+                      <div class="col-sm-4"><input type="color" class="i-c" /></div>
+                      <div class="col-sm-8">
+                        <input type="input" class="form-control" />
+                        <div class="text-right"><small><a class="pointer">Add</a></small></div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
       </div>
     </li>
     <!--end-->
       <!--lower left-->
   <li class="list-group-item">
-      <div (click)="lowerLeftOk()" class="pointer">Lower Bottom Left <span class="caret"></span></div>
+      <div (click)="lowerLeftOk()" class="pointer"><b>3. Lower Bottom Left</b> <span class="pull-right"><i class="fa pointer" [ngClass]="{'fa-plus-square':!lowerLeft, 'fa-minus-square':lowerLeft}"></i></span></div>
       <div *ngIf="lowerLeft">
           <div class="form-group">
             <div class="form-group"></div>
               <input type="file" class="filestyle" data-icon="false">
           </div>
-          <div class="text-right form-group">Select from Library</div>
+          <div class="text-right form-group"><a class="pointer">Select from Library</a></div>
           <div class="form-group clearfix">
-            <div class="form-group b-b"><b>Printing Style:</b></div>
+            <div class="form-group b-b"><b>Printing Method:</b></div>
             <div class="radio" *ngFor="let item of printingStyle; let i=index">
               <label><input type="radio" value="{{item.name}}" name="printing"> {{item.name}}</label>
             </div>
@@ -110,38 +179,73 @@
           <div class="form-group clearfix">
               <div class="form-group b-b"><b>Logo Dimensional:</b></div>
               <div class="row">
+                <div class="col-sm-4"><label for="width">Width (cm)</label></div>
+                <div class="col-sm-4"> <label for="height">Height (cm)</label></div>
+                <div class="col-sm-4"> <label for="aspectRatio">Aspect Ratio</label></div>
+                <div class="clearfix"></div>
               <div class="col-sm-4">
-                <label for="width">Width</label>
                 <select name="width" id="width" class="form-control">
                   <option [value]="i" *ngFor="let item of logoDimension; let i=index">{{item.value}}</option>
                 </select>
               </div>
               <div class="col-sm-4">
-                  <label for="height">Height</label>
                   <select name="height" id="height" class="form-control">
                     <option [value]="i" *ngFor="let item of logoDimension; let i=index">{{item.value}}</option>
                   </select>
                 </div>
-                <div class="col-sm-4">
-                    <label for="aspectRatio">Aspect Ratio</label>
-                      <input type="checkbox" class="aspectRatio"  />
+                <div class="col-sm-4 text-center">
+                      <input type="checkbox"  />
                   </div>
                   </div>
           </div>
+          <div class="form-group clearfix">
+              <div class="form-group"></div>
+                <div class="form-group b-b"><b>Select Logo Color:</b></div>
+                <div class="form-group clearfix">
+                    <div class="clearfix" id="selectColor">
+                      <div class="col-sm-4 t-5">Color</div>
+                      <div class="col-sm-8">
+                        <input type="text" (click)="isOpenColor()" class="i-c" />
+                        <div class="text-right"><small><a class="pointer">Add</a></small></div>
+                      </div>
+                      <!--color code show to hoever-->
+                      <div class="color" *ngIf="openColor">
+                          <div class="row">
+                              <div class="form-group col-sm-2" *ngFor="let item of color; let i=index">
+                                  <input type="color" [value]="item.color" name="insertName">
+                                </div>
+                                </div>
+                      </div>
+                      <!--end-->
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="form-group">
+                      <input type="checkbox"> &nbsp;<b>Enter own color code</b>
+                    </div>
+                    <div class="clearfix">
+                      <div class="col-sm-4"><input type="color" class="i-c" /></div>
+                      <div class="col-sm-8">
+                        <input type="input" class="form-control" />
+                        <div class="text-right"><small><a class="pointer">Add</a></small></div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
       </div>
     </li>
     <!--end-->
           <!--lower right-->
   <li class="list-group-item">
-      <div (click)="lowerRightOk()" class="pointer">Lower Bottom Right <span class="caret"></span></div>
+      <div (click)="lowerRightOk()" class="pointer"><b>4. Lower Bottom Right</b> <span class="pull-right"><i class="fa pointer" [ngClass]="{'fa-plus-square':!lowerRight, 'fa-minus-square':lowerRight}"></i></span></div>
       <div *ngIf="lowerRight">
           <div class="form-group">
             <div class="form-group"></div>
               <input type="file" class="filestyle" data-icon="false">
           </div>
-          <div class="text-right form-group">Select from Library</div>
+          <div class="text-right form-group"><a class="pointer">Select from Library</a></div>
           <div class="form-group clearfix">
-            <div class="form-group b-b"><b>Printing Style:</b></div>
+            <div class="form-group b-b"><b>Printing Method:</b></div>
             <div class="radio" *ngFor="let item of printingStyle; let i=index">
               <label><input type="radio" value="{{item.name}}" name="printing"> {{item.name}}</label>
             </div>
@@ -149,36 +253,70 @@
           <div class="form-group clearfix">
               <div class="form-group b-b"><b>Logo Dimensional:</b></div>
               <div class="row">
+                <div class="col-sm-4"><label for="width">Width (cm)</label></div>
+                <div class="col-sm-4"> <label for="height">Height (cm)</label></div>
+                <div class="col-sm-4"> <label for="aspectRatio">Aspect Ratio</label></div>
+                <div class="clearfix"></div>
               <div class="col-sm-4">
-                <label for="width">Width</label>
                 <select name="width" id="width" class="form-control">
                   <option [value]="i" *ngFor="let item of logoDimension; let i=index">{{item.value}}</option>
                 </select>
               </div>
               <div class="col-sm-4">
-                  <label for="height">Height</label>
                   <select name="height" id="height" class="form-control">
                     <option [value]="i" *ngFor="let item of logoDimension; let i=index">{{item.value}}</option>
                   </select>
                 </div>
-                <div class="col-sm-4">
-                    <label for="aspectRatio">Aspect Ratio</label>
-                      <input type="checkbox" class="aspectRatio"  />
+                <div class="col-sm-4 text-center">
+                      <input type="checkbox"  />
                   </div>
                   </div>
           </div>
+          <div class="form-group clearfix">
+              <div class="form-group"></div>
+                <div class="form-group b-b"><b>Select Logo Color:</b></div>
+                <div class="form-group clearfix">
+                    <div class="clearfix" id="selectColor">
+                      <div class="col-sm-4 t-5">Color</div>
+                      <div class="col-sm-8">
+                        <input type="text" (click)="isOpenColor()" class="i-c" />
+                        <div class="text-right"><small><a class="pointer">Add</a></small></div>
+                      </div>
+                      <!--color code show to hoever-->
+                      <div class="color" *ngIf="openColor">
+                          <div class="row">
+                              <div class="form-group col-sm-2" *ngFor="let item of color; let i=index">
+                                  <input type="color" [value]="item.color" name="insertName">
+                                </div>
+                                </div>
+                      </div>
+                      <!--end-->
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="form-group">
+                      <input type="checkbox"> &nbsp;<b>Enter own color code</b>
+                    </div>
+                    <div class="clearfix">
+                      <div class="col-sm-4"><input type="color" class="i-c" /></div>
+                      <div class="col-sm-8">
+                        <input type="input" class="form-control" />
+                        <div class="text-right"><small><a class="pointer">Add</a></small></div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
       </div>
     </li>
     <!--end-->
 <!--insert name-->
 <li class="list-group-item">
-    <div (click)="insertNameOk()" class="pointer">INSERT NAME <span class="caret"></span></div>
+    <div (click)="insertNameOk()" class="pointer"><b>5. Insert Name</b> <span class="pull-right"><i class="fa pointer" [ngClass]="{'fa-plus-square':!insertName, 'fa-minus-square':insertName}"></i></span></div>
     <div *ngIf="insertName">
       <div class="form-group"></div>
-          <div class="form-group b-b"><b>INSERT NAME:</b></div>
-          <div class="form-group">
-            <input type="type" class="form-control" placeholder="Insert Name" name="insertName" autofocus>
-          </div>
+      <div class="form-group checkbox">
+          <label><input type="checkbox" name="insertName" /> Insert Name</label>
+        </div>
         <div class="form-group clearfix">
             <div class="form-group b-b"><b>Fonts:</b></div>
             <div class="form-group">
@@ -189,8 +327,8 @@
         </div>
         <div class="form-group clearfix">
             <div class="form-group b-b"><b>Select Color:</b></div>
-          <div class="row">
-            <div class="form-group col-sm-2" *ngFor="let item of color; let i=index">
+          <div>
+            <div class="form-group col-sm-3 w-14 paddingboth" *ngFor="let item of color; let i=index">
                 <input type="color" [value]="item.color" name="insertName">
               </div>
               </div>
@@ -200,12 +338,11 @@
 <!--end-->
 <!--insert name-->
 <li class="list-group-item">
-    <div (click)="insertNumberOk()" class="pointer">INSERT NUMBER <span class="caret"></span></div>
+    <div (click)="insertNumberOk()" class="pointer"><b>6. Insert Number</b> <span class="pull-right"><i class="fa pointer" [ngClass]="{'fa-plus-square':!insertNumber, 'fa-minus-square':insertNumber}"></i></span></div>
     <div *ngIf="insertNumber">
       <div class="form-group"></div>
-          <div class="form-group b-b"><b>INSERT NUMBER:</b></div>
-          <div class="form-group">
-            <input type="type" class="form-control" placeholder="Insert Number" name="insertNumber" autofocus>
+          <div class="form-group checkbox">
+            <label><input type="checkbox" name="insertNumber" /> Insert Number</label>
           </div>
         <div class="form-group clearfix">
             <div class="form-group b-b"><b>Fonts:</b></div>
@@ -217,8 +354,8 @@
         </div>
         <div class="form-group clearfix">
             <div class="form-group b-b"><b>Select Color:</b></div>
-          <div class="row">
-            <div class="form-group col-sm-2" *ngFor="let item of color; let i=index">
+          <div>
+            <div class="form-group col-sm-3 w-14 paddingboth" *ngFor="let item of color; let i=index">
                 <input type="color" [value]="item.color" name="insertName">
               </div>
               </div>
@@ -226,8 +363,15 @@
     </div>
   </li>
 <!--end-->
+<!--default code-->
+<li class="list-group-item">
+  <div class="checkbox m-a-0">
+    <label><input type="checkbox" class="t-2" name="default" /> Default Logo</label>
+  </div>
+</li>
+<!--end-->
 </ul>
-<div class="text-muted"><span class="text-danger">* </span> <small>Limited Numbers of character 13 for name &  2 for numbers.</small></div>
+<div class="text-muted break-word"><span class="text-danger">* </span> <small>Limited Numbers of character 13 for name &  2 for numbers.</small></div>
   </div>
 </div>
 </div>
@@ -235,7 +379,8 @@
 <!--end-->
 <!--seven-->
 <section>
-<div class="col-sm-8">
+<div class="w-64">
+  <!--your design code-->
   <div class="panel panel-primary">
     <div class="panel-heading"><span class="pull-left">YOUR DESIGN</span><span class="pull-right">ABL SPORTS</span><span class="clearfix"></span></div>
     <div class="panel-body">
@@ -248,12 +393,14 @@
           <img [src]="tSixdeg" title="360deg" alt="360deg" class="img-responsive w-30">
       </div>
       <div class="pull-right">
-          <img [src]="screenshot" title="screenshot" alt="screenshot" class="img-responsive w-30 pull-right">
+          <!-- <img [src]="screenshot" title="screenshot" alt="screenshot" class="img-responsive w-30 pull-right"> -->
+          <button type="button" class="btn btn-primary" [routerLink]="['/dyo/finish-product']">Next <i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i></button>
       </div>
     </div>
   </div>
     </div>
   </div>
+  <!--end-->
 
   <!--colour selection code-->
 <div class="panel panel-primary">
@@ -268,8 +415,8 @@
   </ul>
 </div>
 <div class="col-sm-8 form-group">
-    <div class="row" *ngIf="sectionOne || sectionTwo || sectionThree">
-        <div class="form-group col-sm-1" *ngFor="let item of color; let i=index">
+    <div class="col-sm-12" *ngIf="sectionOne || sectionTwo || sectionThree">
+        <div class="form-group col-sm-1" *ngFor="let item of color; let i=index"> 
             <input type="color" [value]="item.color" name="insertName">
           </div>
           </div>
@@ -281,25 +428,6 @@
   </div>
 </section>
 <!--end-->
-<!--shirt image show code-->
-<section>
-<div class="col-sm-1 text-center">
-  <span (click)="actionPanelOk()" class="glyphicon glyphicon-arrow-left fa-3x pointer" title="click to open"></span>
-</div>
-<div id="actionPanel" *ngIf="actionPanel">
-  <div class="panel panel-primary">
-    <div class="panel-heading">ACTIONS <span class="pull-right"><i class="fa fa-times pointer" title="close" (click)="closeActionPanel()"></i></span></div>
-    <div class="panel-body" id="img-scroll">
-      <div class="row">
-        <div class="col-sm-4 form-group" *ngFor="let item of image; let i=index">
-          <img [src]="item.img" [title]="item.name" class="img-responsive">
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-</section>
-<!--end-->
 </div>
       </div>
 
@@ -307,3 +435,33 @@
   </div>
   <!--end-->
 </div>
+
+
+<!--right side fix navbar-->
+    <div class="e-s f-right-nav" id="ls-scroll" [ngClass]="{'w-50px':!actionPanel, 'w-20':actionPanel}">
+      <ul class="list-unstyled m-b-0">
+          <li *ngIf="!actionPanel" class="list-group-item pointer clearfix" (click)="actionPanelOk()">
+                <i class="fa fa-align-left fa-2x pull-right"></i>
+          </li>
+          <li *ngIf="actionPanel" class="list-group-item pointer clearfix" (click)="closeActionPanel()">
+              <span class="text-left"><b>Styles</b></span> <i class="fa fa-times fa-2x pull-right"></i>
+        </li>
+          <li>
+            <!--shirt image show code-->
+<section>
+    <div id="actionPanel" style="padding:15px;" *ngIf="actionPanel">
+        <div class="form-group clearfix">
+          <div class="row">
+            <div class="col-sm-4 form-group" *ngFor="let item of image; let i=index">
+              <img [src]="item.img" [title]="item.name" class="img-responsive">
+            </div>
+          </div>
+      </div>
+      <br/>
+      </div>
+    </section>
+    <!--end-->
+          </li>
+      </ul>
+    </div>
+    <!--end-->

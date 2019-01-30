@@ -1,253 +1,48 @@
-
-
-
-<!--profile code here-->
-<ng-template #template>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Profile</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div class="col-sm-4 col-xs-12">
-      <div class="form-group">
-        <img [src]="user" class="img-responsive img-fix img-circle" />
-      </div>
-      <p class="text-center bold">ABL SPORTS</p>
-    </div>
-    <div class="col-sm-8 col-xs-12">
-      <div class="form-group">
-        <label for="driverName">User Name</label>
-        <div class="form-group">
-          <input type="text" class="form-control" value="ABL SPORTS" readonly />
+<div class="col-sm-12 paddingboth">
+  <div class="col-sm-10 col-sm-offset-2 e-s" [ngClass]="{ 'f-w': !on }">
+    <div class="col-sm-12">
+      <div class="row fix-sticky">
+        <div class="col-sm-12 form-group">
+          <div class="header"><div class="page-heading">Store</div></div>
+        </div>
+        <div class="form-group"></div>
+        <div class="form-group col-sm-12">
+          <button type="button" class="btn btn-primary pull-right" (click)="addUser()">
+            Add Rack
+          </button>
+        </div>
+        <!--table heder code-->
+        <div class="col-sm-12">
+          <ul class="list-unstyled bold" id="table-header">
+            <li class="col-sm-1"><input type="checkbox" /></li>
+            <li class="col-sm-2">Name</li>
+            <li class="col-sm-1">RoleDisplay</li>
+            <li class="col-sm-2">Email</li>
+            <li class="col-sm-1">Telephone</li>
+            <li class="col-sm-1">ManagerName</li>
+            <li class="col-sm-2">ManagerEmail</li>
+            <li class="col-sm-1"></li>
+          </ul>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="contactNumber">EmailId</label>
-        <div class="form-group">
-          <input type="email" class="form-control" value="abl_sport@gmail.com" readonly />
-        </div>
+        <!--table body data code-->
+        <ul  class="list-unstyled" id="table-body"
+          *ngFor="let item of activeUsers">
+          <li class="col-sm-1"><input type="checkbox" /></li>
+          <li class="col-sm-2">{{ item.Name }}</li>
+          <li class="col-sm-1">{{ item.RoleDisplay }}</li>
+          <li class="col-sm-2">{{ item.Email }}</li>
+          <li class="col-sm-1">{{ item.Telephone }}</li>
+          <li class="col-sm-1">{{ item.ManagerName }}</li>
+          <li class="col-sm-2">{{ item.ManagerEmail }}</li>
+          <li class="col-sm-1"><button type='button' class='btn btn-success' (click)='viewDetail(item.UserId)'>View Detail</button>
+            <button type='button' class='btn btn-default' (click)='deleteUser(item.UserId)'>Delete</button></li>
+        </ul>
+        <!--end-->
       </div>
-
-      <div class="form-group">
-        <label for="driverName">Password</label>
-        <div class="form-group">
-          <input type="password" class="form-control" value="123456" readonly />
-        </div>
-      </div>
-    </div>
-    <div class="clearfix"></div>
-  </div>
-  <div class="modal-footer">
-    <div class="form-group btn-toolbar">
-      <button type="button" class="btn btn-md btn-default form-group pull-left" (click)="modalRef.hide()">Cancel</button>
-      <button type="button" class="btn btn-md btn-success form-group pull-right">Save</button>
     </div>
   </div>
-</ng-template>
-<!--end-->
-
-
-<!--navbar code here-->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span> 
-            </button>
-            <a class="navbar-brand" [routerLink]="['/dyo']"><img [src]="logo" [alt]="logo" class="img-responsive fix-logo"></a>
-          </div>
-          <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav navbar-right">
-              <li>
-                  <a class="pointer" (click)="shop()"><i class="fa fa-shopping-cart fa-2x t-1" aria-hidden="true"></i> <span class="badge danger set-bell">4</span></a>
-                <div class="profileDrp" *ngIf="shopActive">
-                    <ul class="list-unstyled">
-                        <li class="list-group-item text-center"><span class="bold">Your Cart's</span></li>
-                        <li class="list-group-item"><span>Cart Item</span><span class="pull-right badge success">3</span></li>
-                        <li class="list-group-item"><span>Remove Item</span><span class="pull-right badge danger">1</span></li>
-                    </ul>
-                </div>
-              </li>
-              <li>
-                  <a class="pointer" (click)="bell()"><i class="fa fa-bell-o fa-2x t-1" aria-hidden="true"></i>  <span class="badge danger set-bell">4</span></a>
-                <div class="profileDrp" *ngIf="bellActive">
-                    <ul class="list-unstyled">
-                        <li class="list-group-item"><span>Payment Success</span><span class="pull-right badge success">3</span></li>
-                        <li class="list-group-item"><span>Payment Pending</span><span class="pull-right badge danger">1</span></li>
-                    </ul>
-                </div>
-              </li>
-                  <li class="btn-group ptb-8" dropdown>
-                      <button id="button-basic" dropdownToggle type="button" class="btn btn-link dropdown-toggle"
-                              aria-controls="dropdown-basic">
-                              <span class="glyphicon glyphicon-user"></span> &nbsp; &nbsp; ABL SPORTS
-                      </button>
-                      <ul id="dropdown-basic" id="move" *dropdownMenu class="dropdown-menu"
-                          role="menu" aria-labelledby="button-basic">
-                        <li role="menuitem" routerLinkActive="active" class="pointer" (click)="openModalWithClass(template)"><a class="dropdown-item">Profile</a></li>
-                        <li role="menuitem" routerLinkActive="active" class="pointer"><a class="dropdown-item" (click)="logout()">Logout</a></li>
-                        </ul>
-                      </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    <!--end-->
-    
-    
-    <div class="col-sm-12 paddingboth t-50">
-    <!--left sidebar code-->
-    <div class="col-sm-2 paddingboth e-s" id="ls-scroll" [ngClass]="{'w-n':!on}">
-      <ul class="list-unstyled m-b-0">
-          <li class="list-group-item pointer clearfix">
-                <i class="fa fa-2x pull-right" [ngClass]="{'fa-times':on, 'fa-align-left':!on}" (click)="scrollActive()"></i>
-          </li>
-      </ul>
-    <ul class="list-group">
-            <li class="list-group-item pointer" [routerLink]="['/dyo']">
-                    <div class="pointer bold"><i class="fa fa-users e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1">DYO Items</span></div>
-                  </li>
-                  <li class="list-group-item pointer" [routerLink]="['/dyo-orderDetail']">
-                    <div class="pointer bold"><i class="fa fa-list-alt e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1">My Order</span></div>
-                  </li>
-
-        <li class="list-group-item pointer">
-          <div class="pointer bold"><i class="fa fa-users e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1" (click)="customerOk()">Customer <span class="caret"></span></span></div>
-          <div *ngIf="customer" class="t-i-15">
-              <div class="form-group"></div>
-              <div class="form-group pointer" [routerLink]="['/customer']">View Customers</div>
-              <div class="form-group pointer">Filter Customers</div>
-              <div class="form-group pointer">Add New Customer</div>
-              <div class="form-group pointer">Assigned Sales</div>
-              <div class="form-group pointer">Deactivate Customer</div>
-              <div class="pointer">Action to view logo library</div>
-          </div>
-        </li>
-     
-        <li class="list-group-item pointer">
-            <div class="pointer bold"><i class="fa fa-user e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1" (click)="userOk()">User <span class="caret"></span></span></div>
-            <div *ngIf="users" class="t-i-15">
-                <div class="form-group"></div>
-                <div class="form-group pointer" [routerLink]="['/user']">View Users</div>
-                <div class="form-group pointer">Filter users</div>
-                <div class="form-group pointer">Add New User</div>
-                <div class="form-group pointer">Deactivate Customer</div>
-                <div class="pointer">Resend user password</div>
-            </div>
-          </li>
-    
-          <li class="list-group-item pointer">
-              <div class="pointer bold"><i class="fa fa-cog e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1" (click)="accessControlOk()">Access Control <span class="caret"></span></span></div>
-              <div *ngIf="accessControl" class="t-i-15">
-                  <div class="form-group"></div>
-                  <div class="form-group pointer" [routerLink]="['/accessControl']">Add new screen</div>
-                  <div class="form-group pointer">Assign user to screen</div>
-                  <div class="pointer">View already assigned</div>
-              </div>
-            </li>
-    
-            <li class="list-group-item pointer">
-                <div class="pointer bold"><i class="fa fa-product-hunt e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1" (click)="productOk()">Product <span class="caret"></span></span></div>
-                <div *ngIf="product" class="t-i-15">
-                    <div class="form-group"></div>
-                    <div class="form-group pointer" [routerLink]="['/product']">View Products with stock</div>
-                    <div class="form-group pointer">View product per category</div>
-                    <div class="form-group pointer">Filter Products</div>
-                    <div class="form-group pointer">Add new product with warning level</div>
-                    <div class="form-group pointer">Deactivate product</div>
-                    <div class="form-group pointer">Print product barcode</div>
-                    <div class="form-group pointer">Define product categories</div>
-                    <div class="pointer">View warning</div>
-                </div>
-              </li>
-    
-              <li class="list-group-item pointer">
-                  <div class="pointer bold"><i class="fa fa-rocket e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1" (click)="rackOk()">Rack <span class="caret"></span></span></div>
-                  <div *ngIf="rack" class="t-i-15">
-                      <div class="form-group"></div>
-                      <div class="form-group pointer" [routerLink]="['/rack']">View Rack</div>
-                      <div class="form-group pointer">Filter Rack</div>
-                      <div class="form-group pointer">Add New Block</div>
-                      <div class="form-group pointer">Add New Rack inside Block</div>
-                      <div class="form-group pointer">Add New Row inside Rack</div>
-                      <div class="form-group pointer">Print product barcode</div>
-                      <div class="pointer">View items count per Rack</div>
-                  </div>
-                </li>
-    
-                <li class="list-group-item pointer">
-                    <div class="pointer bold"><i class="fa fa-wikipedia-w e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1" (click)="warehouseOk()">Warehouse <span class="caret"></span></span></div>
-                    <div *ngIf="warehouse" class="t-i-15">
-                        <div class="form-group"></div>
-                        <div class="form-group pointer" [routerLink]="['/warehouse']">View warehouses</div>
-                        <div class="form-group pointer">Add warehouse</div>
-                        <div class="form-group pointer">Edit warehouse</div>
-                        <div class="pointer">Deactive warehouse</div>
-                    </div>
-                  </li>
-    
-                  <li class="list-group-item pointer">
-                      <div class="pointer bold"><i class="fa fa-first-order e-s-1 fa-2x" [ngClass]="{'hide':on}"></i> <span [ngClass]="{'hide':!on}" class="e-s-1" (click)="orderOk()">Orders <span class="caret"></span></span></div>
-                      <div *ngIf="order" class="t-i-15">
-                          <div class="form-group"></div>
-                          <div class="form-group pointer" [routerLink]="['/orders']">View Orders</div>
-                          <div class="form-group pointer">Filter Orders</div>
-                          <div class="form-group pointer">Update Order Tracking</div>
-                          <div class="form-group pointer">Tracking Detail</div>
-                          <div class="form-group pointer">Sales Coordinator acceptance</div>
-                          <div class="form-group pointer">Merchandiser acceptance</div>
-                          <div class="pointer">Upload Merchandiser Sample</div>
-                      </div>
-                    </li>
-    
-      </ul>
-    </div>
-    <!--end-->
-    
-    <!--right sidebar code-->
-    <div class="col-sm-10 col-sm-offset-2 e-s" [ngClass]="{'f-w':!on}">
-<div class="col-sm-12">
-<div class="form-group">
-        <div class="row">
-                <div class="col-sm-12 form-group">
-                        <div class="header">
-                                <div class="page-heading">Product Data</div>
-                                </div>
-                </div>
-                <div class="col-sm-12 form-group"></div>
-            </div>
-<div>
-<!--table header code-->
-<div>
-    <ul class="list-unstyled bold" id="table-header-productData">
-        <li><input type="checkbox"></li>
-        <li>Supplier</li>
-        <li>Invoice Date</li>
-        <li>Responsible</li>
-        <li>Currency</li>
-        <li>Total</li>
-    </ul>
-<!--end-->
-<!--table body code-->
-    <ul class="list-unstyled" id="table-body-productData" *ngFor="let item of productData">
-        <li><input type="checkbox"></li>
-        <li>{{item.supplier}}</li>
-        <li>{{item.invoiceDate}}</li>
-        <li>{{item.responsible}}</li>
-        <li>{{item.currency}}</li>
-        <li>{{item.total}}</li>
-    </ul>
-</div>
-<!--end-->
-</div>
-
-</div>
-</div>
-</div>
-<!--end-->
+  <!--end-->
 </div>

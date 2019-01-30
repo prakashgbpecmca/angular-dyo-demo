@@ -1,6 +1,11 @@
-import { Component, OnInit, TemplateRef } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  TemplateRef,
+  EventEmitter,
+  AfterViewInit
+} from "@angular/core";
 import { Router } from "@angular/router";
-import { setTheme } from "ngx-bootstrap/utils";
 import { BsModalService } from "ngx-bootstrap/modal";
 import { BsModalRef } from "ngx-bootstrap/modal/bs-modal-ref.service";
 import { IProductDataList } from "src/app/service/service";
@@ -10,13 +15,40 @@ import { UserAddEditComponent } from "./user-add-edit.component";
 import { UserService } from "./user.service";
 import { ITrackUser } from "./user";
 import { CommonModalComponent } from "../shared/common-modal.component";
+import { BsDatepickerConfig } from "ngx-bootstrap/datepicker/public_api";
+import { FileUploader } from "ng2-file-upload";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+
+function readBase64(file): Promise<any> {
+  let reader = new FileReader();
+  let future = new Promise((resolve, reject) => {
+    reader.addEventListener(
+      "load",
+      function() {
+        resolve(reader.result);
+      },
+      false
+    );
+
+    reader.addEventListener(
+      "error",
+      function(event) {
+        reject(event);
+      },
+      false
+    );
+
+    reader.readAsDataURL(file);
+  });
+  return future;
+}
 
 @Component({
   selector: "app-user",
   templateUrl: "./user.component.html",
   styleUrls: ["./user.component.less"]
 })
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit, AfterViewInit {
   public modalRef: BsModalRef;
   public user: string;
   public products: string;
@@ -32,16 +64,28 @@ export class UserComponent implements OnInit {
   public product: boolean;
   public accessControl: boolean;
   public on = true;
+  model: any = {
+    FromDate: null,
+    ToDate: null
+  };
+  datePickerConfig: Partial<BsDatepickerConfig>;
+  role = 0;
+  userInfo: any;
+  systemRoles: any[];
   public productDataDetail: IProductDataList[];
   public searchText = "";
   public trackUser: ITrackUser = {
     UserId: 0,
+    RoleId: 0,
     TakeRows: 0,
-    CurrentPage: 0
+    CurrentPage: 0,
+    FromDate: null,
+    ToDate: null
   };
   activeUsers: any[];
   constructor(
     private _router: Router,
+    private http: HttpClient,
     private modalService: BsModalService,
     private _service: ServiceService,
     private _userService: UserService,
@@ -52,6 +96,23 @@ export class UserComponent implements OnInit {
     this.logo = "assets/logo.png";
   }
 
+  // !
+  public uploader: FileUploader = new FileUploader({
+    url: "http://localhost:24047/api/ExpressManifest/UploadMAWBForms",
+    disableMultipart: true
+  });
+
+  public onFileSelected(event: EventEmitter<File[]>) {
+    // let formData: FormData = new FormData();
+    // formData.append("uploadFile", this.uploader.queue[0].file , this.uploader.queue[0].file.name);
+    // this.uploader.queue[0].formData = formData;
+    // this.uploader.queue[0].upload();
+  }
+  ngAfterViewInit() {
+    this.uploader.onAfterAddingFile = item => {
+      item.withCredentials = false;
+    };
+  }
   openModalWithClass(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(
       template,
@@ -105,16 +166,20 @@ export class UserComponent implements OnInit {
   viewDetail(id: number): void {
     if (id) {
       let options: NgbModalOptions = { size: "lg" };
-      let modalRef = this._modalService.open(UserAddEditComponent, options);
+      let modalRef = this._modalService.open(UserAddEditComponent);
       modalRef.componentInstance.type = "Edit";
       modalRef.componentInstance.UserId = id;
-      modalRef.result.then(function() {
-        this.activeUsers();
-      }, function() {});
+      modalRef.result.then(
+        function() {
+          this.activeUsers();
+        },
+        function() {}
+      );
     }
   }
 
   getActiveUsers(): void {
+    this.trackUser.RoleId = this.role;
     this._userService.getUserList(this.trackUser).subscribe(
       data => {
         this.activeUsers = data;
@@ -125,8 +190,26 @@ export class UserComponent implements OnInit {
     );
   }
   ngOnInit() {
-    this.productDataDetail = this._service.productDataList();
-    this.getActiveUsers();
+    this.userInfo = JSON.parse(localStorage.getItem("user"));
+
+    this.datePickerConfig = Object.assign(
+      {},
+      {
+        containerClass: "theme-dark-blue",
+        maxDate: new Date(),
+        dateInputFormat: "DD/MM/YYYY"
+      }
+    );
+
+    this._userService.getSystemRoles().subscribe(
+      data => {
+        this.systemRoles = data;
+        this.getActiveUsers();
+      },
+      error => {
+        console.log(error);
+      }
+    );
 
     // !do not remove it
     this.on = false;

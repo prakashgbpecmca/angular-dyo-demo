@@ -2,25 +2,19 @@
   <div class="modal-header">
     <button type="button" class="close" (click)="_activeModal.dismiss()">
       <i
-        class="fa fa-times-circle-o"
+        class="fa fa-times"
         aria-hidden="true"
-        style="font-size:30px;"
       ></i>
     </button>
     <h4 class="modal-title underline">UserDetail</h4>
   </div>
-  <div class="modal-body"></div>
+  <div class="modal-body">
   <div class="card card-default">
-    <div class="card-heading">BasicDetail</div>
     <div class="card-body">
       <div class="col-sm-6">
-        <div class="form-group"  [ngClass]="{
-          'has-error':
-            countryVar.invalid && (countryVar.touched || submitted)
-        }">
+        <div class="form-group"  [ngClass]=" {'has-error':  countryVar.invalid && (countryVar.touched || submitted) }">
           <label class="control-label" for="country"
-            >Country<span class="redColor">*</span></label
-          >
+            >Country<span class="redColor">*</span></label>
           <div id="Xe">
 
             <select id="country"
@@ -34,7 +28,6 @@
                 {{ country.Name }}
               </option>
             </select>
-            <pre>{{userDetail.Address.Country |json}}</pre>
             <span class="help-block has-error"
               *ngIf="countryVar.invalid &&(countryVar.touched || submitted)">
               Country is required
@@ -112,7 +105,6 @@
           </span>
         </div>
       </div>
-      <div class="clearfix"></div>
       <div class="col-sm-6">
         <div
           class="form-group"
@@ -123,7 +115,7 @@
         >
           <div>
             <label class="control-label" for="nickName"
-              >Short_Name <span class="redColor">*</span></label
+              >Short Name <span class="redColor">*</span></label
             >
           </div>
           <div>
@@ -148,6 +140,7 @@
           </span>
         </div>
       </div>
+      <div class="clearfix"></div>
       <div class="col-sm-6">
         <div
           class="form-group"
@@ -168,7 +161,6 @@
               required
               email />
           </div>
-          <pre>{{userDetail.Email}}</pre>
           <div class="clearfix"></div>
           <span
             class="help-block has-error"
@@ -188,7 +180,6 @@
         </span>
         </div>
       </div>
-      <div class="clearfix"></div>
       <div class="col-sm-6">
         <div
           class="form-group"
@@ -197,7 +188,7 @@
         >
           <div>
             <label class="control-label" for="skype"
-              >Skype_No <span class="redColor">*</span></label
+              >Skype No <span class="redColor">*</span></label
             >
           </div>
           <div>
@@ -221,6 +212,7 @@
           </span>
         </div>
       </div>
+      <div class="clearfix"></div>
       <div class="col-sm-6">
         <div
           class="form-group"
@@ -265,7 +257,6 @@
           <div class="clearfix"></div>
         </div>
       </div>
-      <div class="clearfix"></div>
       <div class="col-sm-6">
         <div class="form-group">
           <label class="control-label " for="mobileCode">Mobile No.</label>
@@ -318,7 +309,6 @@
                   {{ role.DisplayName }}
                 </option>
             </select>
-            <pre>{{userDetail.RoleId}}</pre>
           </div>
           <div class="clearfix"></div>
           <span
@@ -330,7 +320,6 @@
           </span>
         </div>
       </div>
-      <div class="clearfix"></div>
       <!-- <div class="col-sm-6">
         <div
           class="form-group"
@@ -393,95 +382,17 @@
           </span>
         </div>
       </div>
-      <div class="clearfix"></div>
     </div>
     <div class="clearfix"></div>
   </div>
-  <!--Associate Frayte User-->
-  <div class="card card-default">
-    <div class="card-heading pointer" ng-click="ShowHideFrayteusercard()">
-      <div class="floatLeft">
-        <span
-          ><i
-            ng-class="{'fa fa-plus-square-o' : !ShowFrayteusercard, 'fa fa-minus-square-o' : ShowFrayteusercard}"
-            style="font-size: 20px; padding: 1px 10px 0px 0px; float: left;"
-          ></i></span
-        ><span>Manager Detail</span>
-      </div>
-      <div class="clearfix"></div>
-    </div>
-    <div class="card-body">
-      <div class="associateFrayteTable">
-        <div>
-          <div class="colHeader width18-4">Type</div>
-          <div class="colHeader width18-4">Name</div>
-          <div class="colHeader width18-4">Email</div>
-          <div class="colHeader width18-4">TelephoneNo</div>
-          <div class="colHeader width18-4">WorkingHrs</div>
-          <div class="colHeader width8">Remove</div>
-          <div class="clearfix"></div>
-        </div>
-        <div class="card-body">
-          <div>
-            <div class="colCell  width18-4">
-              <input type="text" placeholder="Manager" readonly />
-            </div>
-            <div class="colCell  width18-4 container-fluid">
-              <div class="row">
-                <div class="col-sm-12">
-                  <input
-                    type="text"
-                    [(ngModel)]="userDetail.UserId" [ngbTypeahead]="searchUsers"
-                    placeholder="LineManagerPlaceHolder" name='manger'
-                  />
-                  <!--  [ngbTypeahead]="searchUsers" [resultFormatter]="userFormatter" [inputFormatter]="userFormatter" -->
-                </div>
-              </div>
-            </div>
-            <div class="colCell width18-4">
-              <input
-                type="text"
-                ng-model="userDetail.ManagerUser.Email"
-                placeholder="Email"
-                readonly
-              />
-            </div>
-            <div class="colCell width18-4">
-              <input
-                type="text"
-                ng-model="userDetail.ManagerUser.TelephoneNo"
-                placeholder="TelephoneNo"
-                readonly
-                name='telephone'
-              />
-            </div>
-            <div class="colCell width8" style="padding: 7px 25px !important;">
-              <i
-                class="fa fa-bitbucket redColor pointer"
-                ng-disabled="userDetail.ManagerUser === null || userDetail.ManagerUser.UserId === null || userDetail.ManagerUser.UserId === 0"
-                ng-click="ManagerDetailEmpty(userDetail.ManagerUser)"
-                aria-hidden="true"
-                style="font-size:20px !important;"
-              ></i>
-            </div>
-            <div class="clearfix"></div>
-          </div>
-        </div>
-      </div>
-      <div class="clearfix"></div>
-    </div>
-  </div>
   <!--OfficeAddress-->
-  <div class="card card-default">
-    <div class="card-heading">Office Address</div>
-    <div class="card-body">
+    <div>
       <div class="col-sm-6">
         <div
           class="form-group"
-          [ngClass] ="{ 'has-error': addressVar.invalid &&
-                                                       (addressVar.touched || submitted) }">
+          [ngClass] ="{ 'has-error': addressVar.invalid && (addressVar.touched || submitted) }">
           <label class="control-label" for="address"
-            >Address_1<span class="redColor">*</span></label
+            >Address 1<span class="redColor">*</span></label
           >
           <div>
             <textarea
@@ -493,12 +404,10 @@
               [(ngModel)]="userDetail.Address.Address"
               class="form-control fontsize12"
               placeholder="AddressPlaceholder"
-              required
-            ></textarea>
+              required ></textarea>
             <span
               class="help-block has-error"
-              *ngIf ="addressVar.invalid &&
-                                          (addressVar.touched || submitted)" >
+              *ngIf ="addressVar.invalid && (addressVar.touched || submitted)" >
               AddressValidationError
             </span>
           </div>
@@ -506,7 +415,7 @@
       </div>
       <div class="col-sm-6">
         <div class="form-group">
-          <label class="control-label" for="address2">Address_2</label>
+          <label class="control-label" for="address2">Address 2</label>
           <div>
             <textarea
               cols="1"
@@ -550,7 +459,6 @@
           </div>
         </div>
       </div>
-      <div class="clearfix"></div>
       <div class="col-sm-6">
         <div class="form-group">
           <label class="control-label" for="suburb">Suburb</label>
@@ -567,6 +475,7 @@
           </div>
         </div>
       </div>
+      <div class="clearfix"></div>
       <div class="col-sm-6" *ngIf='userDetail.Address.Country?.Code !== "GBR" && userDetail.Address.Country?.Code !== "HKG"'>
         <div
           class="form-group"
@@ -594,7 +503,6 @@
             >
               StateValidationError
             </span>
-            <pre>{{stateVar.valid}}</pre>
           </div>
         </div>
       </div>
@@ -604,7 +512,7 @@
           [ngClass]="{ 'has-error': postalCodeVar.invalid &&
                                                        (postalCodeVar.touched || submitted) }">
           <label class="control-label" for="postalCode"
-            >PostalCode <span class="redColor">*</span></label>
+            >Postalcode <span class="redColor">*</span></label>
           <div>
             <input
               type="text"
@@ -627,27 +535,11 @@
       </div>
       <div class="clearfix"></div>
     </div>
-    <div class="clearfix"></div>
-  </div>
+</div>
   <div class="modal-footer">
-    <div>
-      <span class="floatLeft">
-          <button
-          (click)='_activeModal.dismiss()'
-          type="submit"
-          class="btn-simple btn-save fontsize12">
-          <i class="fa fa-floppy-o" aria-hidden="true"></i> &nbsp;Cancel
-        </button>
-
-      </span>
-      <div class="floatRight">
-        <button
-          type="submit"
-          class="btn-simple btn-save fontsize12">
-          <i class="fa fa-floppy-o" aria-hidden="true"></i> &nbsp;Save
-        </button>
-      </div>
-      <div class="clearfix"></div>
+    <div class="col-sm-12 clearfix">
+          <button (click)='_activeModal.dismiss()' type="submit" class="btn btn-default pull-left">Cancel</button>
+          <button type="submit" class="btn btn-success pull-right">Save</button>
     </div>
   </div>
 </form>

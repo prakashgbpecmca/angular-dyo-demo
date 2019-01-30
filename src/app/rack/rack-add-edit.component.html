@@ -1,0 +1,170 @@
+<form novalidate #rackFrom  ="ngForm" (ngSubmit)="saveRack(rackFrom)">
+  <div class="modal-header">
+    <button type="button" class="close" (click)="_activeModal.dismiss()">
+      <i
+        class="fa fa-times-circle-o"
+        aria-hidden="true"
+        style="font-size:30px;"
+      ></i>
+    </button>
+    <h4 class="modal-title underline">Add Racks</h4>
+  </div>
+  <div class="modal-body clearfix">
+  <div class="card card-default">    
+    <div class="card-body">
+     <div class="col-sm-12 paddingboth">
+      <div class="col-sm-6">
+        <div class="form-group"  [ngClass]="{
+          'has-error':
+          wareHouseVar.invalid && (wareHouseVar.touched || submitted)
+        }">
+          <label class="control-label" for="country">WareHouse<span class="redColor">*</span></label>
+          <div id="Xe">
+
+            <select id="wareHouse"
+            name="wareHouse"
+              class="form-control"
+              #wareHouseVar = "ngModel"
+               appSelectValidator
+              [(ngModel)]="racksDetail.WareHouseId">
+              <option ngValue="null" selected disabled>Select WareHouse</option>
+              <option *ngFor="let whos of warehouses" [ngValue]="whos.WareHouseId">
+                {{ whos.WareHouseName }}
+              </option>
+            </select>           
+            <!-- <span class="help-block has-error"
+              *ngIf="countryVar.invalid &&(countryVar.touched || submitted)">
+              Country is required
+            </span> -->
+          </div>
+        </div>
+      </div>  
+      <div class="clearfix"></div>   
+      <div class="col-sm-6">
+        <div class="form-group"  [ngClass]="{
+          'has-error':
+          wareHouseVar.invalid && (wareHouseVar.touched || submitted)
+        }">
+          <label class="control-label" for="country"
+            >Blocks<span class="redColor">*</span></label
+          >
+          <div id="Xe">
+
+            <select id="block"
+            name="block"
+              class="form-control"
+              #blockVar = "ngModel"
+               appSelectValidator
+              [(ngModel)]="racksDetail.BlockId">
+              <option ngValue="null" selected disabled>Select Block</option>
+              <option *ngFor="let blk of blocks" [ngValue]="blk.BlockId">
+                {{ blk.BlockName }}
+              </option>
+            </select>           
+            <!-- <span class="help-block has-error"
+              *ngIf="countryVar.invalid &&(countryVar.touched || submitted)">
+              Country is required
+            </span> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 paddingboth">        
+       
+        <div class="col-sm-6">
+          <div class="form-group"  [ngClass]="{
+            'has-error':
+            wareHouseVar.invalid && (wareHouseVar.touched || submitted)
+          }">
+            <label class="control-label" for="country"
+              >Racks<span class="redColor">*</span></label
+            >
+            <div id="Xe">
+  
+              <select id="rack"
+              name="rack"
+                class="form-control"
+                #rackVar = "ngModel"
+                 appSelectValidator
+                [(ngModel)]="racksDetail.RackId">
+                <option ngValue="null" selected disabled>Select Rack</option>
+                <option *ngFor="let rck of racks" [ngValue]="rck.RackId">
+                  {{ rck.RackName }}
+                </option>
+              </select>           
+              <!-- <span class="help-block has-error"
+                *ngIf="countryVar.invalid &&(countryVar.touched || submitted)">
+                Country is required
+              </span> -->
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12">
+        <div class="form-group">          
+          <div class="col-sm-12 paddingboth"> 
+                   
+            <div class="col-sm-6 paddingboth">
+              <label class="control-label " for="SectionsCode">Sections<span class="redColor">*</span></label>
+              <input
+                type="number"
+                id="sections"
+                name="sections"
+                #rowsVar='ngModel'
+                [(ngModel)]="racksDetail.Sections"
+                class="form-control fontsize12"
+                placeholder="Number of Sections"
+                required
+              />
+              <div class="clearfix"></div>
+            </div>  
+            <div class="clearfix"></div>        
+            <!-- <span
+              class="help-block has-error"
+              *ngIf="(rowsVar.invalid || codeVar.invalid) &&
+                                          (rowsVar || submitted)">
+                                          RowsValidationError
+            </span> -->
+            <div class="col-sm-6 paddingboth">
+                <label class="control-label " for="SectionsCode">Rows<span class="redColor">*</span></label>
+                <input
+                  type="number"
+                  id="rows"
+                  name="rows"
+                  #rowsVar='ngModel'
+                  [(ngModel)]="racksDetail.Rows"
+                  class="form-control fontsize12"
+                  placeholder="Number of Rows"
+                  required
+                />
+              </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>    
+    </div>  
+    <pre>{{racksDetail| json}}</pre>
+  </div>  
+</div>
+</div>
+
+  <div class="modal-footer">
+    <div class="row">
+    <div class="col-sm-12">
+          <button
+          (click)='_activeModal.dismiss()'
+          type="submit"
+          class="btn btn-default pull-left">
+          <i class="fa fa-floppy-o" aria-hidden="true"></i> &nbsp;Cancel
+        </button>
+        <button
+          type="submit"
+          class="btn btn-success pull-right">
+          <i class="fa fa-floppy-o" aria-hidden="true"></i> &nbsp;Save
+        </button>
+    </div>
+    </div>
+  </div>
+ 
+ 
+</form>

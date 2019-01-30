@@ -13,24 +13,16 @@
 {{message}}
 </div>
   <div class="modal-footer">
-    <div>
-      <span class="floatLeft">
+    <div class="col-sm-12 clearfix">
           <button
           type="button"
           (click)='_activeModal.dismiss()'
-          class="btn-simple btn-save fontsize12">
-          <i class="fa fa-floppy-o" aria-hidden="true"></i> &nbsp;Cancel  </button>
+          class="btn btn-default pull-right">No</button>
 
-      </span>
-      <div class="floatRight">
         <button
           type="button"
           (click)='close()'
-          class="btn-simple btn-save fontsize12">
-          <i class="fa fa-floppy-o" aria-hidden="true"></i> &nbsp;Save
-        </button>
-      </div>
-      <div class="clearfix"></div>
+          class="btn btn-success pull-left">Yes</button>
     </div>
   </div>
 

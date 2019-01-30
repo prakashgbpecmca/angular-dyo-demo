@@ -14,13 +14,8 @@ import { LoginService } from "./login.service";
 export class LoginComponent implements OnInit {
   Ptk: string;
   errorMessage: string;
-
-  constructor(
-    private _router: Router,
-    private _fb: FormBuilder,
-    private _outh: SecurityService,
-    private _logInService: LoginService
-  ) {
+  submitted = false;
+  constructor(private _router: Router,private _outh: SecurityService,private _logInService: LoginService) {
     this.logo = "assets/logo.png";
   }
 
@@ -35,7 +30,10 @@ export class LoginComponent implements OnInit {
       data => {
         localStorage.setItem("user", JSON.stringify(data));
 
-        this._router.navigate(["home/dyo/products"]);
+        // To do
+
+        // navigate to first module
+        this._router.navigate(["dyo/products"]);
       },
       error => {
         console.log(error);
@@ -48,8 +46,8 @@ export class LoginComponent implements OnInit {
     this._router.navigate(["/forgetpassword"]);
   }
 
-  onSubmit(): void {
-    if (this.loginForm.valid) {
+  onSubmit(isValid: boolean): void {
+    if (isValid) {
       this._outh.oauthToken(this.user).subscribe(
         data => {
           localStorage.setItem("token", JSON.stringify(data));
@@ -64,9 +62,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loginForm = this._fb.group({
-      username: ["", [Validators.required]],
-      password: ["", [Validators.required, Validators.minLength(8)]]
-    });
+
   }
 }

@@ -1,10 +1,7 @@
 
-  <div class="col-sm-12 paddingboth t-50">
-      <div class="col-sm-12 paddingboth t-50">
+  <div class="col-sm-12 paddingboth">
+      <div class="col-sm-12 paddingboth">
           <div class="collapse navbar-collapse" id="myNavbar">
-              <!--ribbon code-->
-        <!--end-->
-
 
   <!--right sidebar code-->
   <div class="col-sm-10 col-sm-offset-2 e-s" [ngClass]="{'f-w':!on}">
@@ -34,9 +31,9 @@
         <div class="pull-left">
             <img [src]="tSixdeg" title="360deg" alt="360deg" class="img-responsive w-30">
         </div>
-        <div class="pull-right">
+        <!-- <div class="pull-right">
             <img [src]="screenshot" title="screenshot" alt="screenshot" class="img-responsive w-30 pull-right">
-        </div>
+        </div> -->
       </div>
     </div>
       </div>
@@ -44,52 +41,28 @@
     <!--end-->
   <div class="clearfix"></div>
     <!--finish product footer code-->
+
+    <!--share my design code-->
 <div class="row">
-<div class="col-sm-8">
-
-<div class="panel panel-primary">
-  <div class="panel-heading">ACTIONS</div>
-  <div class="panel-body">
-      <div class="row">
-<div class="col-sm-4 form-group">
-    <button type="button" class="btn btn-md btn-danger form-control" (click)="backDesign()">Re-edit the complete design</button>
-  </div>
-
-  <div class="col-sm-4 form-group">
-      <button type="button" class="btn btn-md btn-danger form-control" (click)="backDesign()">Add another design with changed name & number</button>
+<div id="btn-finish">
+    <div class="col-sm-2 col-md-3 col-lg-3 form-group">
+        <button type="button" class="btn btn-md btn-danger form-control" (click)="backDesign()">Modify<br/>Design</button>
       </div>
-
-      <div class="col-sm-4 form-group">
-          <button type="button" class="btn btn-md btn-danger form-control" (click)="backDesign()">Design New</button>
+    
+      <div class="col-sm-2 col-md-3 col-lg-3 form-group">
+          <button type="button" class="btn btn-md btn-danger form-control" [routerLink]="['/dyo/mycollection']">Add to<br/>Collection</button>
           </div>
+          <div class="col-sm-2 col-md-3 col-lg-3 form-group">
+              <button type="button" class="btn btm-md btn-danger form-control"><i class="fa fa-download" aria-hidden="true"></i> Download<br/>Job Sheet</button>
+              </div>
+          <div class="col-sm-2 col-md-3 col-lg-3 form-group">
+              <button type="button" class="btn btn-md btn-primary form-control" (click)="backDesign()">Place<br/>Order</button>
+              </div>
+            
+</div>
 
-          <div class="clearfix"></div>
-
-          <div class="col-sm-12">
-            <button type="button" class="btn btm-md btn-primary form-control" (click)="dyoMyCart()"><i class="fa fa-shopping-cart"></i> VIEW CART</button>
-          </div>
-</div>
-</div>
   </div>
-</div>
-<!--share my design code-->
-<div class="col-sm-4">
-    <div class="panel panel-primary">
-      <div class="panel-heading">SHARE MY DESIGN</div>
-      <div class="panel-body">
-        <div>
-          <div class="form-group"></div>
-    <div class="btn-toolbar ptb-10">
-      <button type="button" class="btn btn-md btn-primary m-b-15"> Share my design on <i class="fa fa-facebook"></i></button>
-      <button type="button" class="btn btn-md btn-primary m-b-15"> Share my design on <i class="fa fa-twitter"></i></button>
-      <button type="button" class="btn btn-md btn-primary m-b-15"> Share my design on <i class="fa fa-envelope-o"></i></button>
-    </div>
-        </div>
-      </div>
-    </div>
-    </div>
-    <!--end-->
-  </div>
+      <!--end-->
     <!--end-->
     </div>
   </section>

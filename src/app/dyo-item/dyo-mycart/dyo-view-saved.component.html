@@ -1,0 +1,37 @@
+<form name="viewSavedForm">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-title">View Saved Collection</h4>
+        <button type="button" class="close" aria-describedby="modal-title" (click)="_activeModal.dismiss()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <div class="panel panel-primary">
+            <div class="panel-heading clearfix">
+              <div>
+                <div class="col-sm-3">Collection Name</div>
+                <div class="col-sm-3">Number of Designs</div>
+                <div class="col-sm-3">Client Name</div>
+                <div class="col-sm-3"></div>
+              </div>
+            </div>
+            <div class="panel-body">
+              <div>
+                <div class="col-sm-3">Men Polo Shirt</div>
+                <div class="col-sm-3">2</div>
+                <div class="col-sm-3">ABL SPORTS</div>
+                <div class="col-sm-3">
+                  <button type="button" class="btn btn-default">View</button> &nbsp; 
+                  <button type="button" class="btn btn-primary">Place Order</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer clearfix">
+        <button type="button" class="btn btn-default pull-left" (click)="_activeModal.dismiss()">Cancel</button>
+        <button type="button" class="btn btn-primary pull-right" (click)="viewSaved()">Ok</button>
+      </div>
+    </form>

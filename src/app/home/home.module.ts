@@ -1,16 +1,12 @@
 
 import { NgModule } from "@angular/core";
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HomeComponent } from "./home.component";
 import { RouterModule } from "@angular/router";
-import { CustomerComponent } from '../customer/customer.component';
-import { UserComponent } from '../user/user.component';
-import { AccessControlComponent } from '../accessControl/accessControl.component';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule,  BsDropdownModule.forRoot()],
   exports: [
   ],
   declarations: [HomeComponent]

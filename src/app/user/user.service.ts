@@ -2,19 +2,23 @@ import { Injectable } from "@angular/core";
 import { HttpHeaders, HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { IInitials, ITrackUser, IUserGrid } from "./user";
+import { environment } from 'src/environments/environment';
 const httpOptions = {
   headers: new HttpHeaders({
     "Content-Type": "application/json"
   })
 };
 
-const API_URL = "http://localhost:56269/";
+const API_URL = environment.API_URL; // "http://localhost:56269/";
 @Injectable({
   providedIn: "root"
 })
 export class UserService {
   constructor(private http: HttpClient) {}
 
+  getSystemRoles(): Observable<any[]> {
+    return this.http.get<any[]>(API_URL + "Master/Roles");
+  }
   useremailValidation(email: string): Observable<any> {
     return this.http.get<any>(API_URL + "Account/IsEmailExist", {
       params: {

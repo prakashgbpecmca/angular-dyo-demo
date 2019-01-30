@@ -34,6 +34,10 @@ export class DyoItemComponent implements OnInit {
   public stockItem: IDyo[] = [];
   public dyoProductOk: boolean;
   public shockImg: string;
+  public socks:IDyo[];
+  public lionstar:boolean;
+  public sock:boolean;
+  public dynastyStock:boolean;
 
   constructor(
     private _router: Router,
@@ -101,6 +105,18 @@ export class DyoItemComponent implements OnInit {
     this.dyoProductOk = false;
   }
 
+  lionstarClick(){
+    this.lionstar=!this.lionstar;
+  }
+
+  sockClick(){
+    this.sock=!this.sock;
+  }
+
+  dynastyStockClick(){
+    this.dynastyStock=!this.dynastyStock;
+  }
+
   logout() {
     alert("You have successfully Logout.");
     this._router.navigate(["/login"]);
@@ -114,6 +130,7 @@ export class DyoItemComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.socks=this._dyoService.socksData();
     this.stockItem = this._dyoService.stockItems();
     this.on = false;
   }

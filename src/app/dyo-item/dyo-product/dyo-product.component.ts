@@ -52,7 +52,8 @@ export class DyoProductComponent implements OnInit {
   public sectionOne: boolean;
   public sectionTwo: boolean;
   public sectionThree: boolean;
-
+  public openColor:boolean;
+ 
   constructor(
     private _router: Router,
     private modalService: BsModalService,
@@ -81,6 +82,10 @@ export class DyoProductComponent implements OnInit {
     this.sectionOne = false;
     this.sectionTwo = false;
     this.sectionThree = true;
+  }
+
+  isOpenColor(){
+  this.openColor=!this.openColor;
   }
 
   actionPanelOk() {

@@ -1,45 +1,65 @@
- <div class="col-sm-12 paddingboth t-50">
-
+<div class="col-sm-12 paddingboth">
   <div class="col-sm-10 col-sm-offset-2 e-s" [ngClass]="{ 'f-w': !on }">
     <div class="col-sm-12">
       <div class="row fix-sticky">
         <div class="col-sm-12 form-group">
           <div class="header"><div class="page-heading">Store</div></div>
         </div>
-        <div class="form-group"></div>
-        <div class="form-group col-sm-12">
-          <button type="button" class="btn btn-success" (click)="addUser()">
+        <div class="row">
+    <div class="row clearfix">
+        <div class="col-sm-6 form-group">
+<div class="col-sm-6">
+          <select [(ngModel)]="role" class="form-control">
+            <option selected [value] ="0" >All</option>
+            <option *ngFor="let item of systemRoles" [ngValue]="item.RoleId">
+              {{ item.DisplayName }}
+            </option>
+          </select>
+          </div>
+          <button class='btn btn-primary' type='button' (click)='getActiveUsers()'>Search</button>
+        </div>
+<div class="col-sm-offset-4 col-sm-2">
+  <div class="col-sm-12">
+      <div class="col-sm-12">
+          <button type="button" class="btn btn-primary pull-right" (click)="addUser()">
             Add User
           </button>
-        </div>
+          </div>
+          </div>
+          </div>
+      </div>
         <!--table heder code-->
         <div class="col-sm-12">
           <ul class="list-unstyled bold" id="table-header">
-            <li><input type="checkbox" /></li>
-            <li>Name</li>
-            <li>RoleDisplay</li>
-            <li>Email</li>
-            <li>Telephone</li>
-            <li>ManagerName</li>
-            <li>ManagerEmail</li>
-            <li></li>
+            <li class="col-sm-1"><input type="checkbox" /></li>
+            <li class="col-sm-3">Name</li>
+            <li class="col-sm-2">RoleDisplay</li>
+            <li class="col-sm-3">Email</li>
+            <li class="col-sm-2">Telephone</li>
+            <li class="col-sm-1"></li>
           </ul>
         </div>
       </div>
 
       <div class="form-group">
         <!--table body data code-->
-        <ul  class="list-unstyled" id="table-body"
-          *ngFor="let item of activeUsers">
-          <li><input type="checkbox" /></li>
-          <li>{{ item.Name }}</li>
-          <li>{{ item.RoleDisplay }}</li>
-          <li>{{ item.Email }}</li>
-          <li>{{ item.Telephone }}</li>
-          <li>{{ item.ManagerName }}</li>
-          <li>{{ item.ManagerEmail }}</li>
-          <li><button type='button' class='btn btn-success' (click)='viewDetail(item.UserId)'>View Detail</button>
-            <button type='button' class='btn btn-default' (click)='deleteUser(item.UserId)'>Delete</button></li>
+        <ul class="list-unstyled" id="table-body"  *ngFor="let item of activeUsers">
+          <li class="col-sm-1"><input type="checkbox" /></li>
+          <li class="col-sm-3">{{ item.Name }}</li>
+          <li class="col-sm-2">{{ item.RoleDisplay }}</li>
+          <li class="col-sm-3">{{ item.Email }}</li>
+          <li class="col-sm-2">{{ item.Telephone }}</li>
+
+          <li class="btn-group col-sm-1" dropdown>
+              <button id="button-basic" dropdownToggle type="button" class="btn btn-link dropdown-toggle"
+                      aria-controls="dropdown-basic">Actions
+              </button>
+              <ul id="dropdown-basic" id="move" *dropdownMenu class="dropdown-menu"
+                  role="menu" aria-labelledby="button-basic">
+                <li role="menuitem" routerLinkActive="active" class="pointer" (click)="viewDetail(item.UserId)"><a class="dropdown-item">View Detail</a></li>
+                <li role="menuitem" routerLinkActive="active" class="pointer" (click)="deleteUser(item.UserId)"><a class="dropdown-item">Delete</a></li>
+                </ul>
+              </li>
         </ul>
         <!--end-->
       </div>

@@ -4,7 +4,11 @@ import { setTheme } from 'ngx-bootstrap/utils';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ServiceService } from 'src/app/service/service.service';
+import { NgbModal, NgbModalOptions } from "@ng-bootstrap/ng-bootstrap";
 import { IProductData } from 'src/app/service/service';
+import { CommonModalComponent } from "../shared/common-modal.component";
+import { RackAddEditComponent } from './rack-add-edit.component';
+
 
 @Component({
   selector: 'app-rack',
@@ -29,12 +33,18 @@ export class RackComponent implements OnInit {
   public accessControl:boolean;
   public on=true;
 
-  constructor(private _service:ServiceService, private _router:Router,private modalService: BsModalService) {
+  constructor(private _service:ServiceService, private _router:Router,private modalService: BsModalService , private _modalService: NgbModal) {
     setTheme('bs3'); // or 'bs4'
     this.logo='assets/logo.png';
     this.user='assets/user.png';
    }
 
+   addUser(): void {
+    let options: NgbModalOptions = { size: "lg" };
+    let modalRef = this._modalService.open(RackAddEditComponent, options);
+    modalRef.componentInstance.type = "Add";
+    modalRef.result.then(function() {}, function() {});
+  }
    customerOk(){
     this.customer=!this.customer;
   }

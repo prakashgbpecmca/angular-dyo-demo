@@ -25,7 +25,7 @@ export class UserAddEditComponent implements OnInit {
   type: string;
   UserId: number;
   code: string;
-  phoneCode: "";
+  phoneCode: string;
   setStateDisable = false;
   setZipDisable: false;
   emailExist: boolean;
@@ -73,6 +73,7 @@ export class UserAddEditComponent implements OnInit {
         Phone: "",
         Address: "",
         Address2: "",
+        Address3: "",
         Area: "",
         City: "",
         State: "",
@@ -136,12 +137,14 @@ export class UserAddEditComponent implements OnInit {
     );
   }
 
-  searchUsers (term: any) {
+  searchUsers(term: any) {
     if (term === "") {
       return of([]);
     }
 
-    return this._userService.getActiveUsers(term).pipe(map(response => response));
+    return this._userService
+      .getActiveUsers(term)
+      .pipe(map(response => response));
   }
 
   onBlur(data: any): void {}
@@ -163,7 +166,7 @@ export class UserAddEditComponent implements OnInit {
     );
     if (obj) {
       this.code = obj.PhoneCode;
-      this.phoneCode = obj.PhoneCode;
+      this.phoneCode = "( +" + obj.PhoneCode + ")";
     }
   }
 
